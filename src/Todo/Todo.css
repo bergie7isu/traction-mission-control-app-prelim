@@ -1,0 +1,28 @@
+.todo {
+  border: 1px solid black;
+  border-radius: 5px;
+  margin: 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.todo-status-buttons, .todo-todo-wrapper, .todo-dates, .todo-status, .todo-edit {
+  display: inline-block;
+  text-align: center;
+}
+
+.todo-done-button {
+  background-color: green;
+}
+
+.todo-hold-button {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: orange;
+}
+
+.todo-not-done-button {
+  background-color: red;
+}

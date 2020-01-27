@@ -1,0 +1,13 @@
+.nav {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background-color: gray;
+  text-align: center;
+}
+
+.nav-link {
+  display: inline-block;
+  padding-left: 20px;
+  padding-right: 20px;
+}
