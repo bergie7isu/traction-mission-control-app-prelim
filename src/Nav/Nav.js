@@ -10,28 +10,28 @@ class Nav extends Component {
             <Link to='/L10Meeting'>L-10 Meeting</Link>
         </div>
         <div className='nav-link'>
-            <Link to='/'>Scorecard</Link>
+            <Link to='/Scorecard'>Scorecard</Link>
         </div>
         <div className='nav-link'>
-            <Link to='/'>Rocks</Link>
+            <Link to='/Rocks'>Rocks</Link>
         </div>
         <div className='nav-link'>
-            <Link to='/'>Accountability Chart</Link>
+            <Link to='/AccountabilityChart'>Accountability Chart</Link>
         </div>
         <div className='nav-link'>
-            <Link to='/'>V/TO</Link>
+            <Link to='/VTO'>V/TO</Link>
         </div>
         <div className='nav-link'>
-            <Link to='/'>Team</Link>
+            <Link to='/Team'>Team</Link>
         </div>
         <div className='nav-link'>
-            <Link to='/'>Filter</Link>
+            <Link to='/Filter'>Filter</Link>
         </div>
         <div className='nav-link'>
-            <Link to='/'>L-10 Rating</Link>
+            <Link to='/L10Rating'>L-10 Rating</Link>
         </div>
         <div className='nav-link'>
-            <Link to='/Agenda'>Team Notes</Link>
+            <Link to='/TeamNotes'>Team Notes</Link>
         </div>
         <div className='nav-link'>
             <Link to='/'>Splash</Link>

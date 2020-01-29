@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
-import data from '../dummy-store';
+import { Link } from 'react-router-dom';
 import Issue from '../Issue/Issue';
+import TractionMissionControlContext from '../TractionMissionControlContext';
 
 class Issues extends Component {
+    static contextType = TractionMissionControlContext;
     render() {
-        const issues = data.issues;
+        const { issues } = this.context;
         return (
             <div className='issues'>
                 <h2>Issues</h2>
@@ -17,7 +19,13 @@ class Issues extends Component {
                     created={issue.created}
                     status={issue.status}
                 />
-            )}
+                )}
+                <Link to={'/AddIssue'}>
+                    <button
+                        className='add-issue'>
+                            Add Issue
+                    </button>
+                </Link>
             </div>
         );
     };

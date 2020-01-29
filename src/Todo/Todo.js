@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import './Todo.css';
 import moment from 'moment';
 
@@ -32,7 +33,9 @@ class Todo extends Component {
           {this.props.status}
         </section>
         <section className='todo-edit'>
-          <button>Edit</button>
+          <Link to={`/EditTodo/${this.props.id}`}>
+            <button>Edit</button>
+          </Link>
         </section>
       </div>
     );

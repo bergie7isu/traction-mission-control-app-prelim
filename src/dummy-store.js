@@ -82,5 +82,6 @@ export default {
       "created": "2019-01-03T00:00:00.000Z",
       "status": ""
     }
-  ]
+  ],
+  "team": ["Mark Bergstrom", "Paul Johnson", "Bob Olson", "Steve Thor", "Joel Tjepkes", "Nathan Witt"]
 };
