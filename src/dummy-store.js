@@ -1,86 +1,96 @@
 export default {
   "todos": [
     {
-      "id": 1,
+      "id": "1",
       "todo": "First todo",
       "who": "Mark Bergstrom",
       "created": "2019-01-03T00:00:00.000Z",
       "due": "2019-01-03T00:00:00.000Z",
-      "status": "Done",
-      "issue": ""
+      "status": "",
+      "reviewed": "no",
+      "issue": "1"
     },
     {
-      "id": 2,
+      "id": "2",
       "todo": "Second todo",
-      "who": "David Parker",
+      "who": "Paul Johnson",
       "created": "2019-01-03T00:00:00.000Z",
       "due": "2019-01-03T00:00:00.000Z",
-      "status": "Not Done",
-      "issue": ""
+      "status": "",
+      "reviewed": "no",
+      "issue": "2"
     },
     {
-      "id": 3,
+      "id": "3",
       "todo": "Third todo",
-      "who": "Barack Obama",
+      "who": "Joel Tjepkes",
       "created": "2019-01-03T00:00:00.000Z",
       "due": "2019-01-03T00:00:00.000Z",
       "status": "",
-      "issue": ""
+      "reviewed": "no",
+      "issue": "3"
     },
     {
-      "id": 4,
+      "id": "4",
       "todo": "Fourth todo",
-      "who": "Abraham Lincoln",
-      "created": "2019-01-03T00:00:00.000Z",
-      "due": "2019-01-03T00:00:00.000Z",
-      "status": "Held",
-      "issue": ""
-    },
-    {
-      "id": 5,
-      "todo": "Fifth todo",
-      "who": "Prince",
+      "who": "Steve Thor",
       "created": "2019-01-03T00:00:00.000Z",
       "due": "2019-01-03T00:00:00.000Z",
       "status": "",
-      "issue": ""
+      "reviewed": "no",
+      "issue": "4"
+    },
+    {
+      "id": "5",
+      "todo": "Fifth todo",
+      "who": "Nathan Witt",
+      "created": "2019-01-03T00:00:00.000Z",
+      "due": "2019-01-03T00:00:00.000Z",
+      "status": "",
+      "reviewed": "no",
+      "issue": "5"
     }
   ],
   "issues": [
     {
-      "id": 1,
+      "id": "1",
       "issue": "First issue",
       "who": "Mark Bergstrom",
       "created": "2019-01-03T00:00:00.000Z",
-      "status": ""
+      "status": "",
+      "reviewed": "no"
     },
     {
-      "id": 2,
+      "id": "2",
       "issue": "Second issue",
-      "who": "David Parker",
+      "who": "Paul Johnson",
       "created": "2019-01-03T00:00:00.000Z",
-      "status": ""
+      "status": "",
+      "reviewed": "no"
     },
     {
-      "id": 3,
+      "id": "3",
       "issue": "Third issue",
-      "who": "Justin Trudeau",
+      "who": "Joel Tjepkes",
       "created": "2019-01-03T00:00:00.000Z",
-      "status": ""
+      "status": "",
+      "reviewed": "no"
     },
     {
-      "id": 4,
+      "id": "4",
       "issue": "Fourth issue",
-      "who": "Queen Elizabeth",
+      "who": "Steve Thor",
       "created": "2019-01-03T00:00:00.000Z",
-      "status": ""
+      "status": "",
+      "reviewed": "no"
     },
     {
-      "id": 5,
+      "id": "5",
       "issue": "Fifth issue",
-      "who": "Harry Potter",
+      "who": "Nathan Witt",
       "created": "2019-01-03T00:00:00.000Z",
-      "status": ""
+      "status": "",
+      "reviewed": "no"
     }
   ],
   "team": ["Mark Bergstrom", "Paul Johnson", "Bob Olson", "Steve Thor", "Joel Tjepkes", "Nathan Witt"]

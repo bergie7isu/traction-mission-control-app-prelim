@@ -6,8 +6,13 @@ const TractionMissionControlContext = React.createContext({
     team: [],
     addTodo: () => {},
     addIssue: () => {},
+    editTodo: () => {},
+    editIssue: () => {},
     deleteTodo: () => {},
     deleteIssue: () => {},
+    todoStatus: () => {},
+    issueStatus: () => {},
+    closeMeeting: () => {}
   });
   
   export default TractionMissionControlContext;

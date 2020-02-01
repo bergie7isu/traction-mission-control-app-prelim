@@ -10,19 +10,19 @@ class AddTodo extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            todoTodo: {
+            todo: {
                 value: "",
                 touched: false
             },
-            todoWho: {
+            who: {
                 value: "",
                 touched: false
             },
-            todoDue: {
+            due: {
                 value: moment(Date.now()).add(7,'d').format('YYYY-MM-DD'),
                 touched: false
             },
-            todoIssue: {
+            issue: {
                 value: "",
                 touched: false
             }
@@ -31,73 +31,74 @@ class AddTodo extends Component {
 
     handleSubmit = event => {
         event.preventDefault();
-        const issue = this.context.issues.filter(issue => issue.issue.trim() === event.target['todo-issue'].value.trim());
+        const issue = this.context.issues.filter(issue => issue.issue.trim() === event.target['issue'].value.trim());
         const newTodo = {
             id: uuid(),
-            todo: event.target['todo-todo'].value,
-            who: event.target['todo-who'].value,
+            todo: event.target['todo'].value,
+            who: event.target['who'].value,
             created: moment(Date.now()).format('YYYY-MM-DD'),
-            due: event.target['todo-due'].value,
+            due: event.target['due'].value,
             status: "",
+            reviewed: "no",
             issue: issue.length === 1 ? issue[0].id : ""
         };
         this.context.addTodo(newTodo);
-        this.props.history.goBack()
+        this.props.history.goBack();
     };
 
-    updateTodoTodo(todoTodo) {
+    updateTodo(todo) {
         this.setState({
-            todoTodo: {
-                value: todoTodo,
+            todo: {
+                value: todo,
                 touched: true
             }
         });
     };
 
-    updateTodoWho(todoWho) {
+    updateWho(who) {
         this.setState({
-            todoWho: {
-                value: todoWho,
+            who: {
+                value: who,
                 touched: true
             }
         });
     };
 
-    updateTodoDue(todoDue) {
+    updateDue(due) {
         this.setState({
-            todoDue: {
-                value: todoDue,
+            due: {
+                value: due,
                 touched: true
             }
         });
     };
 
-    updateTodoIssue(todoIssue) {
+    updateIssue(issue) {
         this.setState({
-            todoIssue: {
-                value: todoIssue,
+            issue: {
+                value: issue,
                 touched: true
             }
         });
     };
 
-    validateTodoTodo() {
-        const todoTodo = this.state.todoTodo.value.trim();
-        if (todoTodo === "") {
+    validateTodo() {
+        const todo = this.state.todo.value.trim();
+        if (todo === "") {
             return "Enter a todo!"
         }
     };
 
-    validateTodoWho() {
-        const todoWho = this.state.todoWho.value.trim();
-        if (todoWho === "--Select an owner!--" || todoWho === "") {
+    validateWho() {
+        const who = this.state.who.value.trim();
+        if (who === "--Select an owner!--" || who === "") {
             return "Someone needs to own it!"
         }
     };
 
-    validateTodoDue() {
-        const todoDue = this.state.todoDue.value.trim();
-        if (todoDue === "") {
+    validateDue() {
+        const due = this.state.due.value.trim();
+        if (due === "") {
             return "Commit to a due date!"
         }
     };
@@ -105,9 +106,9 @@ class AddTodo extends Component {
     render() {
         const { issues } = this.context;
         const { team } = this.context;
-        const todoTodoError = this.validateTodoTodo();
-        const todoWhoError = this.validateTodoWho();
-        const todoDueError = this.validateTodoDue();
+        const todoError = this.validateTodo();
+        const whoError = this.validateWho();
+        const dueError = this.validateDue();
         return (
             <div>
                 <h2>Add a Todo!</h2>
@@ -116,26 +117,26 @@ class AddTodo extends Component {
                     onSubmit={this.handleSubmit}>
                         <div className='add-todo-inputs'>
                             <div className='add-todo-todo'>
-                                <label htmlFor='todo-todo'>
+                                <label htmlFor='todo'>
                                     What's the todo?
                                 </label>
                                 <input
                                     type='string'
-                                    name='todo-todo'
-                                    id='todo-todo'
+                                    name='todo'
+                                    id='todo'
                                     placeholder="Action!"
-                                    onChange={e => this.updateTodoTodo(e.target.value)}/>
+                                    onChange={e => this.updateTodo(e.target.value)}/>
                             </div>
-                            {this.state.todoTodo.touched && <ValidationError message={todoTodoError} />}
+                            {this.state.todo.touched && <ValidationError message={todoError} />}
                             <div className='add-todo-who'>
-                                <label htmlFor='todo-who'>
+                                <label htmlFor='who'>
                                     Whose todo is it?
                                 </label>
                                 <select
                                     type='string'
-                                    name='todo-who'
-                                    id='todo-who'
-                                    onChange={e => this.updateTodoWho(e.target.value)}>
+                                    name='who'
+                                    id='who'
+                                    onChange={e => this.updateWho(e.target.value)}>
                                         <option>--Select an owner!--</option>
                                         {team.map(name =>
                                             <option
@@ -145,35 +146,37 @@ class AddTodo extends Component {
                                         )}
                                 </select>
                             </div>
-                            {this.state.todoWho.touched && <ValidationError message={todoWhoError} />}
+                            {this.state.who.touched && <ValidationError message={whoError} />}
                             <div className='add-todo-due'>
-                                <label htmlFor='todo-due'>
+                                <label htmlFor='due'>
                                     When is this todo due?
                                 </label>
                                 <input
                                     type='date'
-                                    name='todo-due'
-                                    id='todo-due'
+                                    name='due'
+                                    id='due'
                                     defaultValue={moment(Date.now()).add(7,'d').format('YYYY-MM-DD')}
-                                    onChange={e => this.updateTodoDue(e.target.value)}
+                                    onChange={e => this.updateDue(e.target.value)}
                                     />
                             </div>
-                            {this.state.todoDue.touched && <ValidationError message={todoDueError} />}
+                            {this.state.due.touched && <ValidationError message={dueError} />}
                             <div className='add-todo-issue'>
-                                <label htmlFor='todo-issue'>
+                                <label htmlFor='issue'>
                                     What issue is this todo related to?
                                 </label>
                                 <select
                                     type='string'
-                                    name='todo-issue'
-                                    id='todo-issue'
-                                    onChange={e => this.updateTodoIssue(e.target.value)}>
+                                    name='issue'
+                                    id='issue'
+                                    onChange={e => this.updateIssue(e.target.value)}>
                                         <option>--Select an issue!--</option>
                                         {issues.map(issue =>
-                                            <option
+                                            (issue.reviewed === "no")
+                                                ? <option
                                                 key={issue.id}>
                                                     {issue.issue}
-                                            </option>
+                                                </option>
+                                                : null
                                         )}
                                 </select>
                             </div>
@@ -182,9 +185,9 @@ class AddTodo extends Component {
                             <button
                                 type='submit'
                                 disabled={
-                                    this.validateTodoTodo() ||
-                                    this.validateTodoWho() ||
-                                    this.validateTodoDue()}>
+                                    this.validateTodo() ||
+                                    this.validateWho() ||
+                                    this.validateDue()}>
                                 Add Todo!
                             </button>
                             {'  '}

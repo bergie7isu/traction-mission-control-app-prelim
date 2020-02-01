@@ -10,15 +10,18 @@ class Issues extends Component {
         return (
             <div className='issues'>
                 <h2>Issues</h2>
-                {issues.map(issue =>
-                <Issue
-                    key={issue.id}
-                    id={issue.id}
-                    issue={issue.issue}
-                    who={issue.who}
-                    created={issue.created}
-                    status={issue.status}
-                />
+                {issues.map(issue => 
+                    (issue.reviewed === "no")
+                        ? <Issue
+                            key={issue.id}
+                            id={issue.id}
+                            issue={issue.issue}
+                            who={issue.who}
+                            created={issue.created}
+                            status={issue.status}
+                            reviewed={issue.reviewed}
+                        />
+                        : null
                 )}
                 <Link to={'/AddIssue'}>
                     <button

@@ -10,17 +10,20 @@ class Todos extends Component {
     return (
       <div className='todos'>
         <h2>Todos</h2>
-        {todos.map(todo =>
-          <Todo
-            key={todo.id}
-            id={todo.id}
-            todo={todo.todo}
-            who={todo.who}
-            created={todo.created}
-            due={todo.due}
-            status={todo.status}
-            issue={todo.issue}
-          />
+        {todos.map(todo => 
+          (todo.reviewed === "no")
+            ? <Todo
+              key={todo.id}
+              id={todo.id}
+              todo={todo.todo}
+              who={todo.who}
+              created={todo.created}
+              due={todo.due}
+              status={todo.status}
+              reviewed={todo.reviewed}
+              issue={todo.issue}
+            />
+            : null
         )}
         <Link to={'/AddTodo'}>
           <button

@@ -26,3 +26,15 @@
 .issue-killed-button {
   background-color: red;
 }
+
+.issue.solved {
+  background-color: green;
+}
+
+.issue.killed {
+  background-color: red;
+}
+
+.issue.combined {
+  background-color: yellow;
+}

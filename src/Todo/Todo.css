@@ -26,3 +26,15 @@
 .todo-not-done-button {
   background-color: red;
 }
+
+.todo.done {
+  background-color: green;
+}
+
+.todo.not-done {
+  background-color: red;
+}
+
+.todo.hold {
+  background-color: yellow;
+}

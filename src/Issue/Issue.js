@@ -1,15 +1,32 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import './Issue.css';
 import moment from 'moment';
+import TractionMissionControlContext from '../TractionMissionControlContext';
 
 class Issue extends Component {
+  static contextType = TractionMissionControlContext;
+
   render() {
+    const issueId = this.props.id;
     return (
-      <div className='issue'>
+      <div className={`issue ${this.props.status.replace(" ", "-").toLowerCase()}`}>
         <section className='issue-status-buttons'>
-          <button className='issue-solved-button'>Solved</button>
-          <button className='issue-killed-button'>Killed</button>
-          <button className='issue-combined-button'>Combined</button>
+          <button
+            className='issue-solved-button'
+            onClick={() => this.context.issueStatus(issueId, "Solved")}>
+              Solved
+          </button>
+          <button
+            className='issue-killed-button'
+            onClick={() => this.context.issueStatus(issueId, "Killed")}>
+              Killed
+          </button>
+          <button 
+            className='issue-combined-button'
+            onClick={() => this.context.issueStatus(issueId, "Combined")}>
+              Combined
+          </button>
         </section>
         <section className='issue-issue-wrapper'>
           <section className='issue-issue'>
@@ -29,7 +46,9 @@ class Issue extends Component {
           {this.props.status}
         </section>
         <section className='issue-edit'>
-          <button>Edit</button>
+          <Link to={`/EditIssue/${this.props.id}`}>
+            <button>Edit</button>
+          </Link>
         </section>
       </div>
     );

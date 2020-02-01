@@ -14,8 +14,11 @@ import TeamNotes from './TeamNotes/TeamNotes';
 import AddTodo from './AddTodo/AddTodo';
 import AddIssue from './AddIssue/AddIssue';
 import EditTodo from './EditTodo/EditTodo';
+import EditIssue from './EditIssue/EditIssue';
 import TractionMissionControlContext from './TractionMissionControlContext';
 import data from './dummy-store';
+import uuid from 'uuid';
+import moment from 'moment';
 
 class App extends Component {
   constructor(props) {
@@ -44,6 +47,90 @@ class App extends Component {
   handleAddIssue = newIssue => {
     this.setState({
       issues: [...this.state.issues, newIssue]
+    });
+  };
+
+  handleEditTodo = updatedTodo => {
+    const newTodos = this.state.todos.map(todo =>
+      (todo.id === updatedTodo.id)
+        ? updatedTodo
+        : todo
+      );
+    this.setState({
+      todos: newTodos
+    });
+  };
+
+  handleEditIssue = updatedIssue => {
+    const newIssues = this.state.issues.map(issue =>
+      (issue.id === updatedIssue.id)
+        ? updatedIssue
+        : issue
+      );
+    this.setState({
+      issues: newIssues
+    });
+  };
+
+  handleDeleteTodo = todoId => {
+    const newTodos = this.state.todos.filter(todo => todo.id !== todoId);
+    this.setState({
+      todos: newTodos
+    });
+  };
+
+  handleDeleteIssue = issueId => {
+    const newIssues = this.state.issues.filter(issue => issue.id !== issueId);
+    this.setState({
+      issues: newIssues
+    });
+  };
+
+  handleTodoStatus = (todoId, status) => {
+    const clickedTodo = this.state.todos.filter(todo => todo.id === todoId);
+    const todoStatus = {...clickedTodo[0], status: status};
+    const newTodos = this.state.todos.map(todo => (todo.id === todoStatus.id) ? todoStatus : todo);
+    this.setState({
+      todos: newTodos
+    });
+    if (status === "Not Done") {
+      const newIssue = {
+        id: uuid(),
+        issue: `Todo not done: ${clickedTodo[0].todo}`,
+        who: `${clickedTodo[0].who}`,
+        created: moment(Date.now()).format('YYYY-MM-DD'),
+        status: "",
+        reviewed: "no"
+      };
+      this.setState({
+        issues: [...this.state.issues, newIssue]
+      });
+    }
+  };
+
+  handleIssueStatus = (issueId, status) => {
+    const clickedIssue = this.state.issues.filter(issue => issue.id === issueId);
+    const issueStatus = {...clickedIssue[0], status: status};
+    const newIssues = this.state.issues.map(issue => (issue.id === issueStatus.id) ? issueStatus : issue);
+    this.setState({
+      issues: newIssues
+    });
+  };
+
+  handleCloseMeeting = () => {
+    const newTodos = this.state.todos.map(todo => 
+      (todo.status !== "" && todo.status !== "Hold")
+        ? {...todo, reviewed: "yes"}
+        : todo
+    );
+    const newIssues = this.state.issues.map(issue => 
+      (issue.status !== "")
+        ? {...issue, reviewed: "yes"}
+        : issue
+    );
+    this.setState({
+      todos: newTodos,
+      issues: newIssues
     });
   };
 
@@ -115,6 +202,11 @@ class App extends Component {
           path='/EditTodo/:id'
           component={EditTodo}
         />
+        <Route
+          exact
+          path='/EditIssue/:id'
+          component={EditIssue}
+        />
       </>
     )
   };
@@ -125,7 +217,14 @@ class App extends Component {
       issues: this.state.issues,
       team: this.state.team,
       addTodo: this.handleAddTodo,
-      addIssue: this.handleAddIssue
+      addIssue: this.handleAddIssue,
+      editTodo: this.handleEditTodo,
+      editIssue: this.handleEditIssue,
+      deleteTodo: this.handleDeleteTodo,
+      deleteIssue: this.handleDeleteIssue,
+      todoStatus: this.handleTodoStatus,
+      issueStatus: this.handleIssueStatus,
+      closeMeeting: this.handleCloseMeeting
     };
     return (
       <TractionMissionControlContext.Provider value={contextValue}>

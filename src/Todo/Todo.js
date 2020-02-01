@@ -2,15 +2,31 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import './Todo.css';
 import moment from 'moment';
+import TractionMissionControlContext from '../TractionMissionControlContext';
 
 class Todo extends Component {
+  static contextType = TractionMissionControlContext;
+
   render() {
+    const todoId = this.props.id;
     return (
-      <div className='todo'>
+      <div className={`todo ${this.props.status.replace(" ", "-").toLowerCase()}`}>
         <section className='todo-status-buttons'>
-          <button className='todo-done-button'>Done</button>
-          <button className='todo-not-done-button'>Not Done</button>
-          <button className='todo-hold-button'>Hold</button>
+          <button 
+            className='todo-done-button'
+            onClick={() => this.context.todoStatus(todoId, "Done")}>
+              Done
+          </button>
+          <button 
+            className='todo-not-done-button'
+            onClick={() => this.context.todoStatus(todoId, "Not Done")}>
+              Not Done
+          </button>
+          <button 
+            className='todo-hold-button'
+            onClick={() => this.context.todoStatus(todoId, "Hold")}>
+              Hold
+          </button>
         </section>
         <section className='todo-todo-wrapper'>
           <section className='todo-todo'>

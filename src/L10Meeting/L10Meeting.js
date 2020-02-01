@@ -5,8 +5,11 @@ import Todos from '../Todos/Todos';
 import Issues from '../Issues/Issues';
 import MessagesToCascade from '../MessagesToCascade/MessagesToCascade';
 import MeetingRating from '../MeetingRating/MeetingRating';
+import TractionMissionControlContext from '../TractionMissionControlContext';
 
 class L10Meeting extends Component {
+  static contextType = TractionMissionControlContext;
+
   render() {
     return (
       <div className='l10-meeting'>
@@ -17,7 +20,11 @@ class L10Meeting extends Component {
         <Issues />
         <MessagesToCascade />
         <MeetingRating />
-        <button>Close Meeting</button>
+        <button
+          className='close-meeting-button'
+          onClick={() => this.context.closeMeeting()}>
+            Close Meeting
+        </button>
       </div>
     );
   };
