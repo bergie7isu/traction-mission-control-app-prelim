@@ -11,7 +11,27 @@ class Todo extends Component {
     const todoId = this.props.id;
     return (
       <div className={`todo ${this.props.status.replace(" ", "-").toLowerCase()}`}>
-        <section className='todo-status-buttons'>
+
+        <section className='todo-content'>
+          <section className='todo-todo-wrapper'>
+            <section className='todo-todo'>
+              <h3>{this.props.todo}</h3>
+            </section>
+            <section className='todo-who'>
+              <h4>{this.props.who}</h4>
+            </section>
+          </section>
+          <section className='todo-dates'>
+            <section className='todo-created'>
+              <b>Created: </b><br/>{moment(this.props.created).format('L')}
+            </section>
+            <section className='todo-due'>
+              <b>Due: </b><br/>{moment(this.props.due).format('L')}
+            </section>
+          </section>
+        </section>
+          
+        <section className='todo-buttons'>
           <button 
             className='todo-done-button'
             onClick={() => this.context.todoStatus(todoId, "Done")}>
@@ -27,32 +47,14 @@ class Todo extends Component {
             onClick={() => this.context.todoStatus(todoId, "Hold")}>
               Hold
           </button>
-        </section>
-        <section className='todo-todo-wrapper'>
-          <section className='todo-todo'>
-            <h3>{this.props.todo}</h3>
-          </section>
-          <section className='todo-who'>
-            <h4>{this.props.who}</h4>
-          </section>
-        </section>
-        <section className='todo-dates'>
-          <section className='todo-created'>
-            <b>Created: </b>{moment(this.props.created).format('L')}
-          </section>
-          <section className='todo-due'>
-            <b>Due: </b>{moment(this.props.due).format('L')}
-          </section>
-        </section>
-        <section className='todo-status'>
-          <section><b>Status:</b></section>
-          {this.props.status}
-        </section>
-        <section className='todo-edit'>
           <Link to={`/EditTodo/${this.props.id}`}>
-            <button>Edit</button>
+            <button
+              className='todo-edit'>
+                Edit
+            </button>
           </Link>
         </section>
+
       </div>
     );
   };

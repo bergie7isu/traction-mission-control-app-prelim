@@ -26,7 +26,8 @@ class App extends Component {
     this.state={
       todos: [],
       issues: [],
-      team: []
+      team: [],
+      ready: false
     };
   };
 
@@ -34,7 +35,8 @@ class App extends Component {
     this.setState({
       todos: data.todos,
       issues: data.issues,
-      team: data.team
+      team: data.team,
+      ready: true
     });
   };
 
@@ -226,14 +228,17 @@ class App extends Component {
       issueStatus: this.handleIssueStatus,
       closeMeeting: this.handleCloseMeeting
     };
-    return (
-      <TractionMissionControlContext.Provider value={contextValue}>
-        <main className='App'>
-            {this.renderRoutes()}
-        </main>  
-      </TractionMissionControlContext.Provider>
-      
-    );
+    if(!this.state.ready) {
+      return null
+    } else {
+      return (
+        <TractionMissionControlContext.Provider value={contextValue}>
+          <main className='App'>
+              {this.renderRoutes()}
+          </main>  
+        </TractionMissionControlContext.Provider>
+      )
+    };
   };
 };
 

@@ -48,7 +48,7 @@ class EditTodo extends Component {
         const clickedTodo = this.context.todos.filter(todo => todo.id === this.props.match.params.id);
         this.setState({
             id: {
-                value: clickedTodo[0].id,
+                value: clickedTodo[0].id || "",
                 touched: false
             },
             todo: {
