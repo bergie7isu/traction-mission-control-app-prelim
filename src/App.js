@@ -3,14 +3,14 @@ import { Route } from 'react-router-dom';
 import './App.css';
 import Splash from './Splash/Splash';
 import L10Meeting from './L10Meeting/L10Meeting';
-import Scorecard from './Scorecard/Scorecard';
-import Rocks from './Rocks/Rocks';
-import AccountabilityChart from './AccountabilityChart/AccountabilityChart';
-import VTO from './VTO/VTO';
-import Team from './Team/Team';
+//import Scorecard from './Scorecard/Scorecard';
+//import Rocks from './Rocks/Rocks';
+//import AccountabilityChart from './AccountabilityChart/AccountabilityChart';
+//import VTO from './VTO/VTO';
+//import Team from './Team/Team';
 import Archive from './Archive/Archive';
-import L10Rating from './L10Rating/L10Rating';
-import TeamNotes from './TeamNotes/TeamNotes';
+//import L10Rating from './L10Rating/L10Rating';
+//import TeamNotes from './TeamNotes/TeamNotes';
 import AddTodo from './AddTodo/AddTodo';
 import AddIssue from './AddIssue/AddIssue';
 import EditTodo from './EditTodo/EditTodo';
@@ -149,46 +149,48 @@ class App extends Component {
           path='/L10Meeting'
           component={L10Meeting}
         />
-        <Route
-          exact
-          path='/Scorecard'
-          component={Scorecard}
-        />
-        <Route
-          exact
-          path='/Rocks'
-          component={Rocks}
-        />
-        <Route
-          exact
-          path='/AccountabilityChart'
-          component={AccountabilityChart}
-        />
-        <Route
-          exact
-          path='/VTO'
-          component={VTO}
-        />
-        <Route
-          exact
-          path='/Team'
-          component={Team}
-        />
+        {//<Route
+        //  exact
+        //  path='/Scorecard'
+        //  component={Scorecard}
+        ///>
+        //<Route
+        //  exact
+        //  path='/Rocks'
+        //  component={Rocks}
+        ///>
+        //<Route
+        //  exact
+        //  path='/AccountabilityChart'
+        //  component={AccountabilityChart}
+        ///>
+        //<Route
+        //  exact
+        //  path='/VTO'
+        //  component={VTO}
+        ///>
+        //<Route
+        //  exact
+        //  path='/Team'
+        //  component={Team}
+        ///>
+  }
         <Route
           exact
           path='/Archive'
           component={Archive}
         />
-        <Route
-          exact
-          path='/L10Rating'
-          component={L10Rating}
-        />
-        <Route
-          exact
-          path='/TeamNotes'
-          component={TeamNotes}
-        />
+        {//<Route
+        //  exact
+        //  path='/L10Rating'
+        //  component={L10Rating}
+        ///>
+        //<Route
+        //  exact
+        //  path='/TeamNotes'
+        //  component={TeamNotes}
+        ///>
+  }
         <Route
           exact
           path='/AddTodo'
