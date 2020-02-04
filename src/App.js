@@ -8,7 +8,7 @@ import Rocks from './Rocks/Rocks';
 import AccountabilityChart from './AccountabilityChart/AccountabilityChart';
 import VTO from './VTO/VTO';
 import Team from './Team/Team';
-import Filter from './Filter/Filter';
+import Archive from './Archive/Archive';
 import L10Rating from './L10Rating/L10Rating';
 import TeamNotes from './TeamNotes/TeamNotes';
 import AddTodo from './AddTodo/AddTodo';
@@ -176,8 +176,8 @@ class App extends Component {
         />
         <Route
           exact
-          path='/Filter'
-          component={Filter}
+          path='/Archive'
+          component={Archive}
         />
         <Route
           exact

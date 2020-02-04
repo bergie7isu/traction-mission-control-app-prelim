@@ -28,7 +28,7 @@ class Issue extends Component {
           </section>
         </section>
 
-        <section className='issue-buttons'>
+        <section className={`issue-buttons ${this.props.buttons}`}>
           <button
             className='issue-solved-button'
             onClick={() => this.context.issueStatus(issueId, "Solved")}>

@@ -22,6 +22,7 @@ class Todos extends Component {
               status={todo.status}
               reviewed={todo.reviewed}
               issue={todo.issue}
+              buttons=''
             />
             : null
         )}

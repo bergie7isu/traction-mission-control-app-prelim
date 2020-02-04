@@ -20,6 +20,7 @@ class Issues extends Component {
                             created={issue.created}
                             status={issue.status}
                             reviewed={issue.reviewed}
+                            buttons=''
                         />
                         : null
                 )}

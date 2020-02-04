@@ -25,7 +25,7 @@ class Nav extends Component {
             <Link to='/Team'>Team</Link>
         </div>
         <div className='nav-link'>
-            <Link to='/Filter'>Filter</Link>
+            <Link to='/Archive'>Archive</Link>
         </div>
         <div className='nav-link'>
             <Link to='/L10Rating'>L-10 Rating</Link>

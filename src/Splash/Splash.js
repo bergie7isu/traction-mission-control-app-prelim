@@ -23,7 +23,7 @@ class Splash extends Component {
                 </section>
                 <section>
                     <h2>Filtering</h2>
-                    <p>Quickly view todos and issues for yourself, your team, or your entire organization. View historical performance data to drive accountability discussions.</p>
+                    <p>Quickly view todos and issues for yourself and your team. View historical performance data to drive accountability discussions.</p>
                 </section>
                 <footer>
                     <h2>Traction Mission Control</h2>

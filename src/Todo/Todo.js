@@ -31,7 +31,7 @@ class Todo extends Component {
           </section>
         </section>
           
-        <section className='todo-buttons'>
+        <section className={`todo-buttons ${this.props.buttons}`}>
           <button 
             className='todo-done-button'
             onClick={() => this.context.todoStatus(todoId, "Done")}>

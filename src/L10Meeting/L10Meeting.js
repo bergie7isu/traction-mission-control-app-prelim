@@ -13,8 +13,8 @@ class L10Meeting extends Component {
   render() {
     return (
       <div className='l10-meeting'>
-        <h1 className='route-heading'>Level 10 Meeting</h1>
         <Nav />
+        <h1 className='route-heading'>Level 10 Meeting</h1>
         <Agenda />
         <Todos />
         <Issues />
