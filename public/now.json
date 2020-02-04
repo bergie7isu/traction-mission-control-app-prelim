@@ -1,0 +1,9 @@
+{
+    "version": 2,
+    "alias": "bergie7isu-traction-mission-control-app",
+    "name": "traction-mission-control-app",
+    "routes": [
+        { "handle": "filesystem" },
+        { "src": "/.*", "dest": "/index.html" }
+    ]
+  }
