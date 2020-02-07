@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import TractionMissionControlContext from '../TractionMissionControlContext';
 import ValidationError from '../ValidationError/ValidationError';
 import moment from 'moment';
-import uuid from 'uuid';
+import config from '../config';
 
 class AddTodo extends Component {
     static contextType = TractionMissionControlContext;
@@ -22,28 +22,41 @@ class AddTodo extends Component {
                 value: moment(Date.now()).add(7,'d').format('YYYY-MM-DD'),
                 touched: false
             },
-            issue: {
-                value: "",
-                touched: false
-            }
+            issue: null,
+            issueText: ""
         };
     };
 
     handleSubmit = event => {
         event.preventDefault();
-        const issue = this.context.issues.filter(issue => issue.issue.trim() === event.target['issue'].value.trim());
         const newTodo = {
-            id: uuid(),
-            todo: event.target['todo'].value,
-            who: event.target['who'].value,
+            todo: this.state.todo.value,
+            who: this.state.who.value,
             created: moment(Date.now()).format('YYYY-MM-DD'),
-            due: event.target['due'].value,
-            status: "",
+            due: this.state.due.value,
+            status: null,
             reviewed: "no",
-            issue: issue.length === 1 ? issue[0].id : ""
+            issue: this.state.issue
         };
-        this.context.addTodo(newTodo);
-        this.props.history.goBack();
+        fetch(config.API_ENDPOINT + `/api/todos`, {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(newTodo)
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(response.status)}
+            return response.json()
+        })
+        .then((jsonNewTodo) => {
+            this.context.addTodo(jsonNewTodo);
+            this.props.history.goBack();
+        })
+        .catch(error => {
+            console.error({ error });
+        });
     };
 
     updateTodo(todo) {
@@ -73,13 +86,21 @@ class AddTodo extends Component {
         });
     };
 
-    updateIssue(issue) {
-        this.setState({
-            issue: {
-                value: issue,
-                touched: true
-            }
-        });
+    updateIssue(issueText) {
+        const { issues } = this.context;
+        const whichIssue = issues.filter(issue => issue.issue === issueText);
+        if (whichIssue.length !== 0) {
+            const issue = whichIssue[0].id;
+            this.setState({
+                issue: issue,
+                issueText: issueText
+            });
+        } else {
+            this.setState({
+                issue: null,
+                issueText: ""
+            });
+        }
     };
 
     validateTodo() {
@@ -155,7 +176,7 @@ class AddTodo extends Component {
                                     type='date'
                                     name='due'
                                     id='due'
-                                    defaultValue={moment(Date.now()).add(7,'d').format('YYYY-MM-DD')}
+                                    value={this.state.due.value}
                                     onChange={e => this.updateDue(e.target.value)}
                                     />
                             </div>

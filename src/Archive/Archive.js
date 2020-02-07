@@ -3,7 +3,6 @@ import Nav from '../Nav/Nav';
 import FilteredTodos from '../FilteredTodos/FilteredTodos';
 import FilteredIssues from '../FilteredIssues/FilteredIssues';
 
-
 class Archive extends Component {
   constructor(props) {
     super(props);

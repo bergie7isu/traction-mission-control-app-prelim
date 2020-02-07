@@ -11,37 +11,37 @@ class FilteredTodos extends Component {
     this.state = {
       text: '',
       who: 'All',
-      date_start: '',
-      date_end: '',
-      status: 'All',
+      start_date: '',
+      end_date: '',
+      status: 'All'
     };
   };
 
-  filterText(text) {
+  updateFilterText(text) {
     this.setState({
       text: text
     });
   };
 
-  filterWho(who) {
+  updateFilterWho(who) {
     this.setState({
       who: who
     });
   };
 
-  filterStartDate(date) {
+  updateFilterStartDate(date) {
     this.setState({
-      date_start: date
+      start_date: date
     });
   };
 
-  filterEndDate(date) {
+  updateFilterEndDate(date) {
     this.setState({
-      date_end: date
+      end_date: date
     });
   };
 
-  filterStatus(status) {
+  updateFilterStatus(status) {
     this.setState({
       status: status
     });
@@ -65,18 +65,18 @@ class FilteredTodos extends Component {
   };
 
   todoFilterStartDate(todos) {
-    if (this.state.date_start === '') {
+    if (this.state.start_date === '') {
       return todos
     } else {
-      return todos.filter(todo => moment(todo.created).isSameOrAfter(moment(this.state.date_start)))
+      return todos.filter(todo => moment(todo.created).isSameOrAfter(moment(this.state.start_date)))
     }
   };
 
   todoFilterEndDate(todos) {
-    if (this.state.date_end === '') {
+    if (this.state.end_date === '') {
       return todos
     } else {
-      return todos.filter(todo => moment(todo.created).isSameOrBefore(moment(this.state.date_end)))
+      return todos.filter(todo => moment(todo.created).isSameOrBefore(moment(this.state.end_date)))
     }
   };
 
@@ -96,7 +96,11 @@ class FilteredTodos extends Component {
 
   render() {
     const { team } = this.context;
-    const filteredTodos = this.todoFilterStatus(this.todoFilterEndDate(this.todoFilterStartDate(this.todoFilterWho(this.todoFilterText()))));
+    const filteredTodos = this.todoFilterStatus(
+      this.todoFilterEndDate(
+        this.todoFilterStartDate(
+          this.todoFilterWho(
+            this.todoFilterText()))));
     return (
       <div className='filtered-todos'>
         <div className='filter-todo-text'>
@@ -107,7 +111,7 @@ class FilteredTodos extends Component {
             name='text'
             id='text'
             value={this.state.text}
-            onChange={e => this.filterText(e.target.value)}>
+            onChange={e => this.updateFilterText(e.target.value)}>
           </textarea>
         </div>
         <div className='filter-todo-who'>
@@ -119,7 +123,7 @@ class FilteredTodos extends Component {
             name='who'
             id='who'
             value={this.state.who}
-            onChange={e => this.filterWho(e.target.value)}>
+            onChange={e => this.updateFilterWho(e.target.value)}>
               <option>All</option>
               {team.map(name =>
                 <option
@@ -137,8 +141,8 @@ class FilteredTodos extends Component {
             type='date'
             name='start-date'
             id='start-date'
-            value={this.state.date_start}
-            onChange={e => this.filterStartDate(e.target.value)}
+            value={this.state.start_date}
+            onChange={e => this.updateFilterStartDate(e.target.value)}
           />
         </div>
         <div className='filter-todo-end-date'>
@@ -149,8 +153,8 @@ class FilteredTodos extends Component {
             type='date'
             name='end-date'
             id='end-date'
-            value={this.state.date_end}
-            onChange={e => this.filterEndDate(e.target.value)}
+            value={this.state.end_date}
+            onChange={e => this.updateFilterEndDate(e.target.value)}
           />
         </div>
         <div className='filter-todo-status'>
@@ -162,7 +166,7 @@ class FilteredTodos extends Component {
             name='status'
             id='status'
             value={this.state.status}
-            onChange={e => this.filterStatus(e.target.value)}>
+            onChange={e => this.updateFilterStatus(e.target.value)}>
               <option>All</option>
               <option>Done</option>
               <option>Not Done</option>

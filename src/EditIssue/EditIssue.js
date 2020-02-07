@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import TractionMissionControlContext from '../TractionMissionControlContext';
 import ValidationError from '../ValidationError/ValidationError';
-import moment from 'moment';
+import config from '../config';
 
 class EditIssue extends Component {
     static contextType = TractionMissionControlContext;
@@ -9,75 +9,98 @@ class EditIssue extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            id: {
-                value: "",
-                touched: false
-            },
             issue: {
-                value: "",
-                touched: false
+                value: ""
             },
             who: {
-                value: "",
-                touched: false
+                value: ""
             },
-            created: {
-                value: "",
-                touched: false
-            },
-            status: {
-                value: "",
-                touched: false
-            },
-            reviewed: {
-                value: "",
-                touched: false
-            }
+            created: "",
+            status: "",
+            reviewed: "",
+            ready: false
         };
     };
 
     componentDidMount() {
-        const clickedIssue = this.context.issues.filter(issue => issue.id === this.props.match.params.id);
-        this.setState({
-            id: {
-                value: clickedIssue[0].id,
-                touched: false
-            },
-            issue: {
-                value: clickedIssue[0].issue,
-                touched: false
-            },
-            who: {
-                value: clickedIssue[0].who,
-                touched: false
-            },
-            created: {
-                value: clickedIssue[0].created,
-                touched: false
-            },
-            status: {
-                value: clickedIssue[0].status,
-                touched: false
-            },
-            reviewed: {
-                value: clickedIssue[0].reviewed,
-                touched: false
+        const issueId = this.props.match.params.id;
+        fetch(config.API_ENDPOINT + `/api/issues/${issueId}`)
+        .then(issueResponse => {
+            if (!issueResponse.ok) {
+            throw new Error(issueResponse.status)
             }
-        });
+            return issueResponse.json()
+        })
+        .then(issue => {
+            this.setState({
+                issue: {
+                    value: issue.issue,
+                    touched: false
+                },
+                who: {
+                    value: issue.who,
+                    touched: false
+                },
+                created: issue.created,
+                status: issue.status,
+                reviewed: issue.reviewed,
+                ready: true
+            });
+        })
+        .catch(editIssueError => this.setState({ editIssueError }));
     };
 
     handleSubmit = event => {
         event.preventDefault();
+        const issueId = this.props.match.params.id;
         const updatedIssue = {
-            id: this.props.match.params.id,
-            issue: event.target['issue'].value,
-            who: event.target['who'].value,
-            created: moment(this.state.created.value).format('YYYY-MM-DD'),
-            status: this.state.status.value,
-            reviewed: this.state.reviewed.value
+            id: issueId,
+            issue: this.state.issue.value,
+            who: this.state.who.value,
+            created: this.state.created,
+            status: this.state.status,
+            reviewed: this.state.reviewed
         };
-        this.context.editIssue(updatedIssue);
-        this.props.history.goBack()
+        fetch(config.API_ENDPOINT + `/api/issues/${issueId}`, {
+            method: 'PATCH',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(updatedIssue)
+        })
+        .then(res => {
+            if (!res.ok)
+                return res.json().then(error => Promise.reject(error))
+        })
+        .then(() => {
+            this.context.editIssue(updatedIssue);
+            this.props.history.goBack();
+        })
+        .catch(error => {
+            console.error({ error });
+        });
+    };
+
+    handleDelete = event => {
+        event.preventDefault();
+        const issueId = this.props.match.params.id;
+        fetch(config.API_ENDPOINT + `/api/issues/${issueId}`, {
+            method: 'DELETE',
+            headers: {
+                'content-type': 'application/json'
+            }
+        })
+        .then(res => {
+            if (!res.ok) {
+                throw new Error(res.status)}
+        })
+        .then(() => {
+            this.context.deleteIssue(issueId);
+            this.props.history.goBack();
+        })
+        .catch(error => {
+            console.error({ error })
+        });
     };
 
     updateIssue(issue) {
@@ -174,10 +197,7 @@ class EditIssue extends Component {
                             {'  '}
                             <button
                                 type='button'
-                                onClick={() => {
-                                    this.context.deleteIssue(this.props.match.params.id);
-                                    this.props.history.goBack();
-                                }}>
+                                onClick={this.handleDelete}>
                                     Delete Issue
                             </button>
                         </div>

@@ -3,22 +3,14 @@ import { Route } from 'react-router-dom';
 import './App.css';
 import Splash from './Splash/Splash';
 import L10Meeting from './L10Meeting/L10Meeting';
-//import Scorecard from './Scorecard/Scorecard';
-//import Rocks from './Rocks/Rocks';
-//import AccountabilityChart from './AccountabilityChart/AccountabilityChart';
-//import VTO from './VTO/VTO';
-//import Team from './Team/Team';
 import Archive from './Archive/Archive';
-//import L10Rating from './L10Rating/L10Rating';
-//import TeamNotes from './TeamNotes/TeamNotes';
 import AddTodo from './AddTodo/AddTodo';
 import AddIssue from './AddIssue/AddIssue';
 import EditTodo from './EditTodo/EditTodo';
 import EditIssue from './EditIssue/EditIssue';
 import TractionMissionControlContext from './TractionMissionControlContext';
 import data from './dummy-store';
-import uuid from 'uuid';
-import moment from 'moment';
+import config from './config';
 
 class App extends Component {
   constructor(props) {
@@ -27,16 +19,38 @@ class App extends Component {
       todos: [],
       issues: [],
       team: [],
-      ready: false
+      todosReady: false,
+      issuesReady: false,
+      teamReady: false
     };
   };
 
   componentDidMount() {
+    fetch(config.API_ENDPOINT + '/api/todos')
+      .then(todosResponse => {
+        if (!todosResponse.ok) {
+          throw new Error(todosResponse.status)
+        }
+        return todosResponse.json()
+      })
+      .then(todos => {
+        this.setState({ todos, todosReady: true})
+      })
+      .catch(todosError => this.setState({ todosError }));
+    fetch(config.API_ENDPOINT + '/api/issues')
+      .then(issuesResponse => {
+        if (!issuesResponse.ok) {
+          throw new Error(issuesResponse.status)
+        }
+        return issuesResponse.json()
+      })
+      .then(issues => {
+        this.setState({ issues, issuesReady: true})
+      })
+      .catch(issuesError => this.setState({ issuesError }));
     this.setState({
-      todos: data.todos,
-      issues: data.issues,
       team: data.team,
-      ready: true
+      teamReady: true
     });
   };
 
@@ -54,7 +68,7 @@ class App extends Component {
 
   handleEditTodo = updatedTodo => {
     const newTodos = this.state.todos.map(todo =>
-      (todo.id === updatedTodo.id)
+      (Number(todo.id) === Number(updatedTodo.id))
         ? updatedTodo
         : todo
       );
@@ -65,7 +79,7 @@ class App extends Component {
 
   handleEditIssue = updatedIssue => {
     const newIssues = this.state.issues.map(issue =>
-      (issue.id === updatedIssue.id)
+      (Number(issue.id) === Number(updatedIssue.id))
         ? updatedIssue
         : issue
       );
@@ -75,63 +89,15 @@ class App extends Component {
   };
 
   handleDeleteTodo = todoId => {
-    const newTodos = this.state.todos.filter(todo => todo.id !== todoId);
+    const newTodos = this.state.todos.filter(todo => Number(todo.id) !== Number(todoId));
     this.setState({
       todos: newTodos
     });
   };
 
   handleDeleteIssue = issueId => {
-    const newIssues = this.state.issues.filter(issue => issue.id !== issueId);
+    const newIssues = this.state.issues.filter(issue => Number(issue.id) !== Number(issueId));
     this.setState({
-      issues: newIssues
-    });
-  };
-
-  handleTodoStatus = (todoId, status) => {
-    const clickedTodo = this.state.todos.filter(todo => todo.id === todoId);
-    const todoStatus = {...clickedTodo[0], status: status};
-    const newTodos = this.state.todos.map(todo => (todo.id === todoStatus.id) ? todoStatus : todo);
-    this.setState({
-      todos: newTodos
-    });
-    if (status === "Not Done") {
-      const newIssue = {
-        id: uuid(),
-        issue: `Todo not done: ${clickedTodo[0].todo}`,
-        who: `${clickedTodo[0].who}`,
-        created: moment(Date.now()).format('YYYY-MM-DD'),
-        status: "",
-        reviewed: "no"
-      };
-      this.setState({
-        issues: [...this.state.issues, newIssue]
-      });
-    }
-  };
-
-  handleIssueStatus = (issueId, status) => {
-    const clickedIssue = this.state.issues.filter(issue => issue.id === issueId);
-    const issueStatus = {...clickedIssue[0], status: status};
-    const newIssues = this.state.issues.map(issue => (issue.id === issueStatus.id) ? issueStatus : issue);
-    this.setState({
-      issues: newIssues
-    });
-  };
-
-  handleCloseMeeting = () => {
-    const newTodos = this.state.todos.map(todo => 
-      (todo.status !== "" && todo.status !== "Hold")
-        ? {...todo, reviewed: "yes"}
-        : todo
-    );
-    const newIssues = this.state.issues.map(issue => 
-      (issue.status !== "")
-        ? {...issue, reviewed: "yes"}
-        : issue
-    );
-    this.setState({
-      todos: newTodos,
       issues: newIssues
     });
   };
@@ -149,48 +115,11 @@ class App extends Component {
           path='/L10Meeting'
           component={L10Meeting}
         />
-        {//<Route
-        //  exact
-        //  path='/Scorecard'
-        //  component={Scorecard}
-        ///>
-        //<Route
-        //  exact
-        //  path='/Rocks'
-        //  component={Rocks}
-        ///>
-        //<Route
-        //  exact
-        //  path='/AccountabilityChart'
-        //  component={AccountabilityChart}
-        ///>
-        //<Route
-        //  exact
-        //  path='/VTO'
-        //  component={VTO}
-        ///>
-        //<Route
-        //  exact
-        //  path='/Team'
-        //  component={Team}
-        ///>
-  }
         <Route
           exact
           path='/Archive'
           component={Archive}
         />
-        {//<Route
-        //  exact
-        //  path='/L10Rating'
-        //  component={L10Rating}
-        ///>
-        //<Route
-        //  exact
-        //  path='/TeamNotes'
-        //  component={TeamNotes}
-        ///>
-  }
         <Route
           exact
           path='/AddTodo'
@@ -216,23 +145,21 @@ class App extends Component {
   };
 
   render() {
-    const contextValue = {
-      todos: this.state.todos,
-      issues: this.state.issues,
-      team: this.state.team,
-      addTodo: this.handleAddTodo,
-      addIssue: this.handleAddIssue,
-      editTodo: this.handleEditTodo,
-      editIssue: this.handleEditIssue,
-      deleteTodo: this.handleDeleteTodo,
-      deleteIssue: this.handleDeleteIssue,
-      todoStatus: this.handleTodoStatus,
-      issueStatus: this.handleIssueStatus,
-      closeMeeting: this.handleCloseMeeting
-    };
-    if(!this.state.ready) {
+    
+    if(!this.state.todosReady || !this.state.issuesReady || !this.state.teamReady) {
       return null
     } else {
+      const contextValue = {
+        todos: this.state.todos,
+        issues: this.state.issues,
+        team: this.state.team,
+        addTodo: this.handleAddTodo,
+        addIssue: this.handleAddIssue,
+        editTodo: this.handleEditTodo,
+        editIssue: this.handleEditIssue,
+        deleteTodo: this.handleDeleteTodo,
+        deleteIssue: this.handleDeleteIssue
+      };
       return (
         <TractionMissionControlContext.Provider value={contextValue}>
           <main className='App'>

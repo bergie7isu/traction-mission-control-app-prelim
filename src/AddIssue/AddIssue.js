@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import TractionMissionControlContext from '../TractionMissionControlContext';
 import ValidationError from '../ValidationError/ValidationError';
 import moment from 'moment';
-import uuid from 'uuid';
+import config from '../config';
 
 class AddIssue extends Component {
     static contextType = TractionMissionControlContext;
@@ -24,15 +24,31 @@ class AddIssue extends Component {
     handleSubmit = event => {
         event.preventDefault();
         const newIssue = {
-            id: uuid(),
-            issue: event.target['issue'].value,
-            who: event.target['who'].value,
+            issue: this.state.issue.value,
+            who: this.state.who.value,
             created: moment(Date.now()).format('YYYY-MM-DD'),
-            status: "",
+            status: null,
             reviewed: "no"
         };
-        this.context.addIssue(newIssue);
-        this.props.history.goBack()
+        fetch(config.API_ENDPOINT + `/api/issues`, {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(newIssue)
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(response.status)}
+            return response.json()
+        })
+        .then((jsonNewIssue) => {
+            this.context.addIssue(jsonNewIssue);
+            this.props.history.goBack();
+        })
+        .catch(error => {
+            console.error({ error });
+        });
     };
 
     updateIssue(issue) {
