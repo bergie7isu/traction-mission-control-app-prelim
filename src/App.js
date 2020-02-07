@@ -11,6 +11,7 @@ import EditIssue from './EditIssue/EditIssue';
 import TractionMissionControlContext from './TractionMissionControlContext';
 import data from './dummy-store';
 import config from './config';
+//import Archive from './Archive/Archive';
 
 class App extends Component {
   constructor(props) {
@@ -162,9 +163,11 @@ class App extends Component {
       };
       return (
         <TractionMissionControlContext.Provider value={contextValue}>
-          <main className='App'>
-              {this.renderRoutes()}
-          </main>  
+          {//<main className='App'>
+          //    {this.renderRoutes()}
+          //</main> 
+      } 
+          <Archive />
         </TractionMissionControlContext.Provider>
       )
     };
