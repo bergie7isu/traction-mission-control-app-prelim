@@ -35,6 +35,7 @@ class AddTodo extends Component {
             created: moment(Date.now()).format('YYYY-MM-DD'),
             due: this.state.due.value,
             status: null,
+            status_date: null,
             reviewed: "no",
             issue: this.state.issue
         };
@@ -106,7 +107,7 @@ class AddTodo extends Component {
     validateTodo() {
         const todo = this.state.todo.value.trim();
         if (todo === "") {
-            return "Enter a todo!"
+            return "Enter a to-do!"
         }
     };
 
@@ -132,14 +133,14 @@ class AddTodo extends Component {
         const dueError = this.validateDue();
         return (
             <div>
-                <h2>Add a Todo!</h2>
+                <h2>Add a To-do!</h2>
                 <form
                     className="add-todo-form"
                     onSubmit={this.handleSubmit}>
                         <div className='add-todo-inputs'>
                             <div className='add-todo-todo'>
                                 <label htmlFor='todo'>
-                                    What's the todo?
+                                    What's the to-do?
                                 </label>
                                 <input
                                     type='string'
@@ -151,7 +152,7 @@ class AddTodo extends Component {
                             {this.state.todo.touched && <ValidationError message={todoError} />}
                             <div className='add-todo-who'>
                                 <label htmlFor='who'>
-                                    Whose todo is it?
+                                    Whose to-do is it?
                                 </label>
                                 <select
                                     type='string'
@@ -170,7 +171,7 @@ class AddTodo extends Component {
                             {this.state.who.touched && <ValidationError message={whoError} />}
                             <div className='add-todo-due'>
                                 <label htmlFor='due'>
-                                    When is this todo due?
+                                    When is this to-do due?
                                 </label>
                                 <input
                                     type='date'
@@ -183,7 +184,7 @@ class AddTodo extends Component {
                             {this.state.due.touched && <ValidationError message={dueError} />}
                             <div className='add-todo-issue'>
                                 <label htmlFor='issue'>
-                                    What issue is this todo related to?
+                                    What issue is this to-do related to?
                                 </label>
                                 <select
                                     type='string'
@@ -209,7 +210,7 @@ class AddTodo extends Component {
                                     this.validateTodo() ||
                                     this.validateWho() ||
                                     this.validateDue()}>
-                                Add Todo!
+                                Add To-do!
                             </button>
                             {'  '}
                             <button

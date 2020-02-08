@@ -20,6 +20,7 @@ class EditTodo extends Component {
                value: ''
             },
             status: '',
+            status_date: '',
             reviewed: '',
             issue: '',
             issueText: '',
@@ -52,6 +53,7 @@ class EditTodo extends Component {
                     touched: false
                 },
                 status: todo.status,
+                status_date: todo.status_date,
                 reviewed: todo.reviewed,
                 issue: todo.issue
             });
@@ -81,6 +83,7 @@ class EditTodo extends Component {
             created: this.state.created,
             due: this.state.due.value,
             status: this.state.status,
+            status_date: this.state.status_date,
             reviewed: this.state.reviewed,
             issue: this.state.issue
         };
@@ -173,7 +176,7 @@ class EditTodo extends Component {
     validateTodo() {
         const todo = this.state.todo.value.trim();
         if (todo === "") {
-            return "Enter a todo!"
+            return "Enter a to-do!"
         }
     };
 
@@ -202,14 +205,14 @@ class EditTodo extends Component {
             const dueError = this.validateDue();
             return (
                 <div>
-                    <h2>Edit a Todo!</h2>
+                    <h2>Edit a To-do!</h2>
                     <form
                         className="edit-todo-form"
                         onSubmit={this.handleSubmit}>
                             <div className='edit-todo-inputs'>
                                 <div className='edit-todo-todo'>
                                     <label htmlFor='todo'>
-                                        What's the todo?
+                                        What's the to-do?
                                     </label>
                                     <input
                                         type='string'
@@ -222,7 +225,7 @@ class EditTodo extends Component {
                                 {this.state.todo.touched && <ValidationError message={todoError} />}
                                 <div className='edit-todo-who'>
                                     <label htmlFor='who'>
-                                        Whose todo is it?
+                                        Whose to-do is it?
                                     </label>
                                     <select
                                         type='string'
@@ -242,7 +245,7 @@ class EditTodo extends Component {
                                 {this.state.who.touched && <ValidationError message={whoError} />}
                                 <div className='edit-todo-due'>
                                     <label htmlFor='due'>
-                                        When is this todo due?
+                                        When is this to-do due?
                                     </label>
                                     <input
                                         type='date'
@@ -255,7 +258,7 @@ class EditTodo extends Component {
                                 {this.state.due.touched && <ValidationError message={dueError} />}
                                 <div className='edit-todo-issue'>
                                     <label htmlFor='issue'>
-                                        What issue is this todo related to?
+                                        What issue is this to-do related to?
                                     </label>
                                     <select
                                         type='string'
@@ -282,7 +285,7 @@ class EditTodo extends Component {
                                         this.validateTodo() ||
                                         this.validateWho() ||
                                         this.validateDue()}>
-                                    Update Todo!
+                                    Update To-do!
                                 </button>
                                 {'  '}
                                 <button
@@ -294,7 +297,7 @@ class EditTodo extends Component {
                                 <button
                                     type='button'
                                     onClick={this.handleDelete}>
-                                        Delete Todo
+                                        Delete To-do
                                 </button>
                             </div>
                     </form>

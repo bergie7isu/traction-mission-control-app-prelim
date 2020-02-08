@@ -7,7 +7,7 @@ class Archive extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      selectedItem: 'Todos'
+      selectedItem: 'To-dos'
     };
   };
 
@@ -18,7 +18,7 @@ class Archive extends Component {
   };
 
   displayFilter() {
-    if (this.state.selectedItem === 'Todos') {
+    if (this.state.selectedItem === 'To-dos') {
       return <FilteredTodos />
     } else if (this.state.selectedItem === 'Issues') {
       return <FilteredIssues />
@@ -40,7 +40,7 @@ class Archive extends Component {
           id='select'
           value={this.state.selectedItem}
           onChange={e => this.updateSelected(e.target.value)}>
-            <option>Todos</option>
+            <option>To-dos</option>
             <option>Issues</option>
         </select>
         {this.displayFilter()}

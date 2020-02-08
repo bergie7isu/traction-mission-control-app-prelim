@@ -9,7 +9,7 @@ class Todos extends Component {
     const { todos } = this.context;
     return (
       <div className='todos'>
-        <h2>Todos</h2>
+        <h2>To-dos</h2>
         {todos.map(todo => 
           (todo.reviewed === "no")
             ? <Todo
@@ -20,16 +20,18 @@ class Todos extends Component {
               created={todo.created}
               due={todo.due}
               status={todo.status}
+              status_date={todo.status_date}
               reviewed={todo.reviewed}
               issue={todo.issue}
               buttons=''
+              show_status='hidden'
             />
             : null
         )}
         <Link to={'/AddTodo'}>
           <button
             className='add-todo'>
-              Add Todo
+              Add To-do
           </button>
         </Link>
       </div>

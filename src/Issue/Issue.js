@@ -8,9 +8,9 @@ import config from '../config';
 class Issue extends Component {
   static contextType = TractionMissionControlContext;
 
-  handleStatus(status) {
+  handleStatus(status, status_date) {
     const issueId = this.props.id;
-    const updatedIssue = {...this.props, status: status};
+    const updatedIssue = {...this.props, status: status, status_date: status_date};
     fetch(config.API_ENDPOINT + `/api/issues/${issueId}`, {
       method: 'PATCH',
       headers: {
@@ -56,20 +56,23 @@ class Issue extends Component {
           </section>
         </section>
 
+        <section className={`issue-status ${this.props.show_status}`}>
+          <b>Status: </b>{this.props.status} <b>Status Date: </b> {moment(this.props.status_date).format('L')}
+        </section>  
         <section className={`issue-buttons ${this.props.buttons}`}>
           <button
             className='issue-solved-button'
-            onClick={() => this.handleStatus('Solved')}>
+            onClick={() => this.handleStatus('Solved', moment(Date.now()).format('YYYY-MM-DD'))}>
               Solved
           </button>
           <button
             className='issue-killed-button'
-            onClick={() => this.handleStatus('Killed')}>
+            onClick={() => this.handleStatus('Killed', moment(Date.now()).format('YYYY-MM-DD'))}>
               Killed
           </button>
           <button 
             className='issue-combined-button'
-            onClick={() => this.handleStatus('Combined')}>
+            onClick={() => this.handleStatus('Combined', moment(Date.now()).format('YYYY-MM-DD'))}>
               Combined
           </button>
           <Link to={`/EditIssue/${this.props.id}`}>

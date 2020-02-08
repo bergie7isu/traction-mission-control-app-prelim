@@ -28,6 +28,7 @@ class AddIssue extends Component {
             who: this.state.who.value,
             created: moment(Date.now()).format('YYYY-MM-DD'),
             status: null,
+            status_date: null,
             reviewed: "no"
         };
         fetch(config.API_ENDPOINT + `/api/issues`, {

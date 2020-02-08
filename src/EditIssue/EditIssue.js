@@ -17,6 +17,7 @@ class EditIssue extends Component {
             },
             created: "",
             status: "",
+            status_date: "",
             reviewed: "",
             ready: false
         };
@@ -43,6 +44,7 @@ class EditIssue extends Component {
                 },
                 created: issue.created,
                 status: issue.status,
+                status_date: issue.status_date,
                 reviewed: issue.reviewed,
                 ready: true
             });
@@ -59,6 +61,7 @@ class EditIssue extends Component {
             who: this.state.who.value,
             created: this.state.created,
             status: this.state.status,
+            status_date: this.state.status_date,
             reviewed: this.state.reviewed
         };
         fetch(config.API_ENDPOINT + `/api/issues/${issueId}`, {

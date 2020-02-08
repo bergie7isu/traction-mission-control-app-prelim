@@ -68,7 +68,7 @@ class FilteredTodos extends Component {
     if (this.state.start_date === '') {
       return todos
     } else {
-      return todos.filter(todo => moment(todo.created).isSameOrAfter(moment(this.state.start_date)))
+      return todos.filter(todo => moment(todo.status_date).isSameOrAfter(moment(this.state.start_date)))
     }
   };
 
@@ -76,7 +76,7 @@ class FilteredTodos extends Component {
     if (this.state.end_date === '') {
       return todos
     } else {
-      return todos.filter(todo => moment(todo.created).isSameOrBefore(moment(this.state.end_date)))
+      return todos.filter(todo => moment(todo.status_date).isSameOrBefore(moment(this.state.end_date)))
     }
   };
 
@@ -105,7 +105,7 @@ class FilteredTodos extends Component {
       <div className='filtered-todos'>
         <div className='filter-todo-text'>
           <label htmlFor='text'>
-            Todo text:
+            To-do text:
           </label>
           <textarea
             name='text'
@@ -135,7 +135,7 @@ class FilteredTodos extends Component {
         </div>
         <div className='filter-todo-start-date'>
           <label htmlFor='start-date'>
-            Start date:
+            Start status date:
           </label>
           <input
             type='date'
@@ -147,7 +147,7 @@ class FilteredTodos extends Component {
         </div>
         <div className='filter-todo-end-date'>
           <label htmlFor='end-date'>
-            End date:
+            End status date:
           </label>
           <input
             type='date'
@@ -183,9 +183,11 @@ class FilteredTodos extends Component {
                 created={todo.created}
                 due={todo.due}
                 status={todo.status}
+                status_date={todo.status_date}
                 reviewed={todo.reviewed}
                 issue={todo.issue}
                 buttons='hidden'
+                show_status=''
               />
               : null
           )}

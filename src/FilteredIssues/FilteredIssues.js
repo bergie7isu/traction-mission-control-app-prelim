@@ -68,7 +68,7 @@ class FilteredIssues extends Component {
     if (this.state.start_date === '') {
       return issues
     } else {
-      return issues.filter(issue => moment(issue.created).isSameOrAfter(moment(this.state.start_date)))
+      return issues.filter(issue => moment(issue.status_date).isSameOrAfter(moment(this.state.start_date)))
     }
   };
 
@@ -76,7 +76,7 @@ class FilteredIssues extends Component {
     if (this.state.end_date === '') {
       return issues
     } else {
-      return issues.filter(issue => moment(issue.created).isSameOrBefore(moment(this.state.end_date)))
+      return issues.filter(issue => moment(issue.status_date).isSameOrBefore(moment(this.state.end_date)))
     }
   };
 
@@ -135,7 +135,7 @@ class FilteredIssues extends Component {
         </div>
         <div className='filter-issue-start-date'>
           <label htmlFor='start-date'>
-            Start date:
+            Start status date:
           </label>
           <input
             type='date'
@@ -147,7 +147,7 @@ class FilteredIssues extends Component {
         </div>
         <div className='filter-issue-end-date'>
           <label htmlFor='end-date'>
-            End date:
+            End status date:
           </label>
           <input
             type='date'
@@ -183,8 +183,10 @@ class FilteredIssues extends Component {
                 who={issue.who}
                 created={issue.created}
                 status={issue.status}
+                status_date={issue.status_date}
                 reviewed={issue.reviewed}
                 buttons='hidden'
+                show_status=''
               />
               : null
           )}

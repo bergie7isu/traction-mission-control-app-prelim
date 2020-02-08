@@ -8,9 +8,9 @@ import config from '../config';
 class Todo extends Component {
   static contextType = TractionMissionControlContext;
 
-  handleStatus(status) {
+  handleStatus(status, status_date) {
     const todoId = this.props.id;
-    const updatedTodo = {...this.props, status: status};
+    const updatedTodo = {...this.props, status: status, status_date: status_date};
     fetch(config.API_ENDPOINT + `/api/todos/${todoId}`, {
       method: 'PATCH',
       headers: {
@@ -34,6 +34,7 @@ class Todo extends Component {
         who: `${updatedTodo.who}`,
         created: moment(Date.now()).format('YYYY-MM-DD'),
         status: null,
+        status_date: null,
         reviewed: "no"
       };
       fetch(config.API_ENDPOINT + `/api/issues`, {
@@ -85,21 +86,24 @@ class Todo extends Component {
             </section>
           </section>
         </section>
-          
+
+        <section className={`todo-status ${this.props.show_status}`}>
+          <b>Status: </b>{this.props.status} <b>Status Date: </b> {moment(this.props.status_date).format('L')}
+        </section>  
         <section className={`todo-buttons ${this.props.buttons}`}>
           <button 
             className='todo-done-button'
-            onClick={() => this.handleStatus('Done')}>
+            onClick={() => this.handleStatus('Done', moment(Date.now()).format('YYYY-MM-DD'))}>
               Done
           </button>
           <button 
             className='todo-not-done-button'
-            onClick={() => this.handleStatus('Not Done')}>
+            onClick={() => this.handleStatus('Not Done', moment(Date.now()).format('YYYY-MM-DD'))}>
               Not Done
           </button>
           <button 
             className='todo-hold-button'
-            onClick={() => this.handleStatus('Hold')}>
+            onClick={() => this.handleStatus('Hold', moment(Date.now()).format('YYYY-MM-DD'))}>
               Hold
           </button>
           <Link to={`/EditTodo/${this.props.id}`}>

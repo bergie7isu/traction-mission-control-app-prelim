@@ -19,8 +19,10 @@ class Issues extends Component {
                             who={issue.who}
                             created={issue.created}
                             status={issue.status}
+                            status_date={issue.status_date}
                             reviewed={issue.reviewed}
                             buttons=''
+                            show_status='hidden'
                         />
                         : null
                 )}

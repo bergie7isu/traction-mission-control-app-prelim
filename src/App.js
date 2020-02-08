@@ -26,7 +26,6 @@ class App extends Component {
   };
 
   componentDidMount() {
-    console.log(config.API_ENDPOINT);
     fetch(config.API_ENDPOINT + '/api/todos')
       .then(todosResponse => {
         if (!todosResponse.ok) {
@@ -146,7 +145,6 @@ class App extends Component {
   };
 
   render() {
-    
     if(!this.state.todosReady || !this.state.issuesReady || !this.state.teamReady) {
       return null
     } else {
