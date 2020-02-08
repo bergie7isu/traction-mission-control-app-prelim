@@ -26,6 +26,7 @@ class App extends Component {
   };
 
   componentDidMount() {
+    console.log(config.API_ENDPOINT);
     fetch(config.API_ENDPOINT + '/api/todos')
       .then(todosResponse => {
         if (!todosResponse.ok) {
