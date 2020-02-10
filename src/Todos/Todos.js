@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import Todo from '../Todo/Todo';
 import TractionMissionControlContext from '../TractionMissionControlContext';
+import './Todos.css';
 
 class Todos extends Component {
   static contextType = TractionMissionControlContext;
@@ -9,7 +10,7 @@ class Todos extends Component {
     const { todos } = this.context;
     return (
       <div className='todos'>
-        <h2>To-dos</h2>
+        <h2 className='todos-title'>To-do List</h2>
         {todos.map(todo => 
           (todo.reviewed === "no")
             ? <Todo
@@ -30,7 +31,7 @@ class Todos extends Component {
         )}
         <Link to={'/AddTodo'}>
           <button
-            className='add-todo'>
+            className='add-todo-button'>
               Add To-do
           </button>
         </Link>

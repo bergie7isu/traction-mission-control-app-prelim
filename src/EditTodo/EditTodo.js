@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import TractionMissionControlContext from '../TractionMissionControlContext';
 import ValidationError from '../ValidationError/ValidationError';
 import config from '../config';
+import './EditTodo.css';
 
 class EditTodo extends Component {
     static contextType = TractionMissionControlContext;
@@ -22,62 +23,51 @@ class EditTodo extends Component {
             status: '',
             status_date: '',
             reviewed: '',
-            issue: '',
+            issue: null,
             issueText: '',
             ready: false
-        }
+        };
     };
 
     componentDidMount() {
+        const { todos, issues } = this.context;
         const todoId = this.props.match.params.id;
-        fetch(config.API_ENDPOINT + `/api/todos/${todoId}`)
-        .then(todoResponse => {
-            if (!todoResponse.ok) {
-            throw new Error(todoResponse.status)
-            }
-            return todoResponse.json()
-        })
-        .then(todo => {
+        const todo = todos.filter(todoToEdit => Number(todoToEdit.id) === Number(todoId));
+        this.setState({
+            todo: {
+                value: todo[0].todo,
+                touched: false
+            },
+            who: {
+                value: todo[0].who,
+                touched: false
+            },
+            created: todo[0].created,
+            due: {
+                value: todo[0].due,
+                touched: false
+            },
+            status: todo[0].status,
+            status_date: todo[0].status_date,
+            reviewed: todo[0].reviewed,
+            issue: todo[0].issue,
+        });
+        if (todo[0].issue !== null) {
+            const issueId = todo[0].issue;
+            const issue = issues.filter(issueFromId => issueFromId.id === issueId);
             this.setState({
-                todo: {
-                    value: todo.todo,
-                    touched: false
-                },
-                who: {
-                    value: todo.who,
-                    touched: false
-                },
-                created: todo.created,
-                due: {
-                    value: todo.due,
-                    touched: false
-                },
-                status: todo.status,
-                status_date: todo.status_date,
-                reviewed: todo.reviewed,
-                issue: todo.issue
+                issueText: issue[0].issue,
             });
-            return fetch(config.API_ENDPOINT + `/api/issues/${todo.issue}`)
-        })
-        .then(issueResponse => {
-            if (!issueResponse.ok) {
-                throw new Error(issueResponse.status)
-                }
-            return issueResponse.json()})
-        .then(issue => {
-            this.setState({
-                issueText: issue.issue,
-                ready: true
-            })
-        })
-        .catch(editTodoError => this.setState({ editTodoError }));
+        };
+        this.setState({
+            ready: true
+        });
     };
 
     handleSubmit = event => {
         event.preventDefault();
         const todoId = this.props.match.params.id;
         const updatedTodo = {
-            id: todoId,
             todo: this.state.todo.value,
             who: this.state.who.value,
             created: this.state.created,
@@ -204,8 +194,8 @@ class EditTodo extends Component {
             const whoError = this.validateWho();
             const dueError = this.validateDue();
             return (
-                <div>
-                    <h2>Edit a To-do!</h2>
+                <div className='edit-todo'>
+                    <h2 className='edit-todo-title'>Edit a To-do!</h2>
                     <form
                         className="edit-todo-form"
                         onSubmit={this.handleSubmit}>
@@ -214,7 +204,7 @@ class EditTodo extends Component {
                                     <label htmlFor='todo'>
                                         What's the to-do?
                                     </label>
-                                    <input
+                                    <textarea
                                         type='string'
                                         name='todo'
                                         id='todo'
@@ -287,19 +277,19 @@ class EditTodo extends Component {
                                         this.validateDue()}>
                                     Update To-do!
                                 </button>
-                                {'  '}
                                 <button
                                     type='button'
                                     onClick={() => this.props.history.goBack()}>
                                         Cancel
                                 </button>
-                                {'  '}
-                                <button
-                                    type='button'
-                                    onClick={this.handleDelete}>
-                                        Delete To-do
-                                </button>
+                                
                             </div>
+                            <button
+                                className='delete-todo-button'
+                                type='button'
+                                onClick={this.handleDelete}>
+                                    Delete<br/>To-do
+                            </button>
                     </form>
                 </div>
             );

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Nav from '../Nav/Nav';
 import FilteredTodos from '../FilteredTodos/FilteredTodos';
 import FilteredIssues from '../FilteredIssues/FilteredIssues';
+import './Archive.css';
 
 class Archive extends Component {
   constructor(props) {
@@ -30,19 +31,24 @@ class Archive extends Component {
       <div className='archive'>
         <Nav />
         <h1 className='route-heading'>Archive</h1>
-        <label htmlFor='select'>
-          What do you want to filter?
-        </label>
-        <select
-          className='filter-select'
-          type='string'
-          name='select'
-          id='select'
-          value={this.state.selectedItem}
-          onChange={e => this.updateSelected(e.target.value)}>
-            <option>To-dos</option>
-            <option>Issues</option>
-        </select>
+        <div className='archive-select'>
+          <div className='select-wrapper'>
+            <label htmlFor='select'>
+              What do you want to filter?
+            </label>
+            <select
+              className='filter-select'
+              type='string'
+              name='select'
+              id='select'
+              value={this.state.selectedItem}
+              onChange={e => this.updateSelected(e.target.value)}>
+                <option>To-dos</option>
+                <option>Issues</option>
+            </select>
+          </div>
+            
+        </div>
         {this.displayFilter()}
       </div>
     );

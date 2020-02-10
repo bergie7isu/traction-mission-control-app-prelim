@@ -3,6 +3,7 @@ import TractionMissionControlContext from '../TractionMissionControlContext';
 import ValidationError from '../ValidationError/ValidationError';
 import moment from 'moment';
 import config from '../config';
+import './AddIssue.css';
 
 class AddIssue extends Component {
     static contextType = TractionMissionControlContext;
@@ -89,8 +90,8 @@ class AddIssue extends Component {
         const issueError = this.validateIssue();
         const whoError = this.validateWho();
         return (
-            <div>
-                <h2>Add an Issue!</h2>
+            <div className='add-issue'>
+                <h2 className='add-issue-title'>Add an Issue!</h2>
                 <form
                     className="add-issue-form"
                     onSubmit={this.handleSubmit}>
@@ -99,7 +100,7 @@ class AddIssue extends Component {
                                 <label htmlFor='issue'>
                                     What's the issue?
                                 </label>
-                                <input
+                                <textarea
                                     type='string'
                                     name='issue'
                                     id='issue'
@@ -135,7 +136,6 @@ class AddIssue extends Component {
                                     this.validateWho()}>
                                 Add Issue!
                             </button>
-                            {'  '}
                             <button
                                 type='button'
                                 onClick={() => this.props.history.goBack()}>

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import TractionMissionControlContext from '../TractionMissionControlContext';
 import ValidationError from '../ValidationError/ValidationError';
 import config from '../config';
+import './EditIssue.css';
 
 class EditIssue extends Component {
     static contextType = TractionMissionControlContext;
@@ -10,46 +11,38 @@ class EditIssue extends Component {
         super(props);
         this.state = {
             issue: {
-                value: ""
+                value: ''
             },
             who: {
-                value: ""
+                value: ''
             },
-            created: "",
-            status: "",
-            status_date: "",
-            reviewed: "",
+            created: '',
+            status: '',
+            status_date: '',
+            reviewed: '',
             ready: false
         };
     };
 
     componentDidMount() {
+        const { issues } = this.context;
         const issueId = this.props.match.params.id;
-        fetch(config.API_ENDPOINT + `/api/issues/${issueId}`)
-        .then(issueResponse => {
-            if (!issueResponse.ok) {
-            throw new Error(issueResponse.status)
-            }
-            return issueResponse.json()
-        })
-        .then(issue => {
-            this.setState({
-                issue: {
-                    value: issue.issue,
-                    touched: false
-                },
-                who: {
-                    value: issue.who,
-                    touched: false
-                },
-                created: issue.created,
-                status: issue.status,
-                status_date: issue.status_date,
-                reviewed: issue.reviewed,
-                ready: true
-            });
-        })
-        .catch(editIssueError => this.setState({ editIssueError }));
+        const issue = issues.filter(issueToEdit => Number(issueToEdit.id) === Number(issueId));
+        this.setState({
+            issue: {
+                value: issue[0].issue,
+                touched: false
+            },
+            who: {
+                value: issue[0].who,
+                touched: false
+            },
+            created: issue[0].created,
+            status: issue[0].status,
+            status_date: issue[0].status_date,
+            reviewed: issue[0].reviewed,
+            ready: true
+        });
     };
 
     handleSubmit = event => {
@@ -143,8 +136,8 @@ class EditIssue extends Component {
         const issueError = this.validateIssue();
         const whoError = this.validateWho();
         return (
-            <div>
-                <h2>Edit an Issue!</h2>
+            <div className='edit-issue'>
+                <h2 className='edit-issue-title'>Edit an Issue!</h2>
                 <form
                     className="edit-issue-form"
                     onSubmit={this.handleSubmit}>
@@ -153,7 +146,7 @@ class EditIssue extends Component {
                                 <label htmlFor='issue'>
                                     What's the issue?
                                 </label>
-                                <input
+                                <textarea
                                     type='string'
                                     name='issue'
                                     id='issue'
@@ -191,19 +184,18 @@ class EditIssue extends Component {
                                     this.validateWho()}>
                                 Update Issue!
                             </button>
-                            {'  '}
                             <button
                                 type='button'
                                 onClick={() => this.props.history.goBack()}>
                                     Cancel
                             </button>
-                            {'  '}
-                            <button
-                                type='button'
-                                onClick={this.handleDelete}>
-                                    Delete Issue
-                            </button>
                         </div>
+                        <button
+                            className='delete-issue-button'
+                            type='button'
+                            onClick={this.handleDelete}>
+                                Delete<br/>Issue
+                        </button>
                 </form>
             </div>
         );

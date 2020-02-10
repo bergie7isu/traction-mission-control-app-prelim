@@ -5,48 +5,48 @@ class Agenda extends Component {
     render() {
         return (
             <div className='agenda'>
-                <h2>Agenda</h2>
+                <h2 className='agenda-title'>Agenda</h2>
                 <table>
                     <tbody>
                         <tr>
-                            <th>Topic</th>
+                            <th className='top-left'>Topic</th>
                             <th>Guidelines</th>
-                            <th>Duration</th>
+                            <th className='top-right'>Duration</th>
                         </tr>
                         <tr>
                             <td>Segue</td>
-                            <td>Personal Best/Business Best</td>
-                            <td>5 minutes</td>
+                            <td>Personal Best / Business Best</td>
+                            <td>5 min</td>
                         </tr>
                         <tr>
                             <td>Scorecard</td>
                             <td>No Discussion</td>
-                            <td>5 minutes</td>
+                            <td>5 min</td>
                         </tr>
                         <tr>
                             <td>Rocks</td>
                             <td>"On-track" or "Off-track"</td>
-                            <td>5 minutes</td>
+                            <td>5 min</td>
                         </tr>
                         <tr>
                             <td>Headlines</td>
-                            <td>Customer/Vendor/Employee</td>
-                            <td>5 minutes</td>
+                            <td>Customer / Vendor / Employee</td>
+                            <td>5 min</td>
                         </tr>
                         <tr>
-                            <td>Todo List</td>
+                            <td>To-do List</td>
                             <td>"Done" or "Not Done"</td>
-                            <td>5 minutes</td>
+                            <td>5 min</td>
                         </tr>
                         <tr>
                             <td>IDS</td>
                             <td>Identify, Discuss, Solve</td>
-                            <td>60 minutes</td>
+                            <td>60 min</td>
                         </tr>
                         <tr>
-                            <td>Conclude</td>
-                            <td>Recap Todo List, Cascading Messages, Rating</td>
-                            <td>5 minutes</td>
+                            <td className='bottom-left'>Conclude</td>
+                            <td>Recap To-do List, Cascading Messages, Rating</td>
+                            <td className='bottom-right'>5 min</td>
                         </tr>
                     </tbody>
                 </table>

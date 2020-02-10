@@ -3,6 +3,7 @@ import TractionMissionControlContext from '../TractionMissionControlContext';
 import ValidationError from '../ValidationError/ValidationError';
 import moment from 'moment';
 import config from '../config';
+import './AddTodo.css';
 
 class AddTodo extends Component {
     static contextType = TractionMissionControlContext;
@@ -132,8 +133,8 @@ class AddTodo extends Component {
         const whoError = this.validateWho();
         const dueError = this.validateDue();
         return (
-            <div>
-                <h2>Add a To-do!</h2>
+            <div className='add-todo'>
+                <h2 className='add-todo-title'>Add a To-do!</h2>
                 <form
                     className="add-todo-form"
                     onSubmit={this.handleSubmit}>
@@ -142,7 +143,7 @@ class AddTodo extends Component {
                                 <label htmlFor='todo'>
                                     What's the to-do?
                                 </label>
-                                <input
+                                <textarea
                                     type='string'
                                     name='todo'
                                     id='todo'
@@ -212,7 +213,6 @@ class AddTodo extends Component {
                                     this.validateDue()}>
                                 Add To-do!
                             </button>
-                            {'  '}
                             <button
                                 type='button'
                                 onClick={() => this.props.history.goBack()}>

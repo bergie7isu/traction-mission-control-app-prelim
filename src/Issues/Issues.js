@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import Issue from '../Issue/Issue';
 import TractionMissionControlContext from '../TractionMissionControlContext';
+import './Issues.css';
 
 class Issues extends Component {
     static contextType = TractionMissionControlContext;
@@ -9,7 +10,7 @@ class Issues extends Component {
         const { issues } = this.context;
         return (
             <div className='issues'>
-                <h2>Issues</h2>
+                <h2 className='issues-title'>Issues List</h2>
                 {issues.map(issue => 
                     (issue.reviewed === "no")
                         ? <Issue
@@ -28,7 +29,7 @@ class Issues extends Component {
                 )}
                 <Link to={'/AddIssue'}>
                     <button
-                        className='add-issue'>
+                        className='add-issue-button'>
                             Add Issue
                     </button>
                 </Link>

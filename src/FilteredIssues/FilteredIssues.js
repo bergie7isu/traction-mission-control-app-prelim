@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import TractionMissionControlContext from '../TractionMissionControlContext';
 import Issue from '../Issue/Issue';
 import moment from 'moment';
+import './FilteredIssues.css';
 
 class FilteredIssues extends Component {
   static contextType = TractionMissionControlContext;
@@ -103,77 +104,82 @@ class FilteredIssues extends Component {
             this.issueFilterText()))));
     return (
       <div className='filtered-issues'>
-        <div className='filter-issue-text'>
-          <label htmlFor='text'>
-            Issue text:
-          </label>
-          <textarea
-            name='text'
-            id='text'
-            value={this.state.text}
-            onChange={e => this.updateFilterText(e.target.value)}>
-          </textarea>
+        <div className='issue-filters'>
+          <h2 className='todo-filters-title'>Issue Filters</h2>
+          <div className='filter-issue-text'>
+            <label htmlFor='text'>
+              Issue text:
+            </label>
+            <textarea
+              name='text'
+              id='text'
+              value={this.state.text}
+              onChange={e => this.updateFilterText(e.target.value)}>
+            </textarea>
+          </div>
+          <div className='filter-issue-who'>
+            <label htmlFor='who'>
+              Who:
+            </label>
+            <select
+              type='string'
+              name='who'
+              id='who'
+              value={this.state.who}
+              onChange={e => this.updateFilterWho(e.target.value)}>
+                <option>All</option>
+                {team.map(name =>
+                  <option
+                    key={name}>
+                      {name}
+                  </option>
+                )}
+            </select>
+          </div>
+          <div className='filter-issue-start-date'>
+            <label htmlFor='start-date'>
+              Start status date:
+            </label>
+            <input
+              type='date'
+              name='start-date'
+              id='start-date'
+              value={this.state.start_date}
+              onChange={e => this.updateFilterStartDate(e.target.value)}
+            />
+          </div>
+          <div className='filter-issue-end-date'>
+            <label htmlFor='end-date'>
+              End status date:
+            </label>
+            <input
+              type='date'
+              name='end-date'
+              id='end-date'
+              value={this.state.end_date}
+              onChange={e => this.updateFilterEndDate(e.target.value)}
+            />
+          </div>
+          <div className='filter-issue-status'>
+          <label htmlFor='status'>
+              Status:
+            </label>
+            <select
+              type='string'
+              name='status'
+              id='status'
+              value={this.state.status}
+              onChange={e => this.updateFilterStatus(e.target.value)}>
+                <option>All</option>
+                <option>Solved</option>
+                <option>Killed</option>
+                <option>Combined</option>
+            </select>
+          </div>
         </div>
-        <div className='filter-issue-who'>
-          <label htmlFor='who'>
-            Who:
-          </label>
-          <select
-            type='string'
-            name='who'
-            id='who'
-            value={this.state.who}
-            onChange={e => this.updateFilterWho(e.target.value)}>
-              <option>All</option>
-              {team.map(name =>
-                <option
-                  key={name}>
-                    {name}
-                </option>
-              )}
-          </select>
-        </div>
-        <div className='filter-issue-start-date'>
-          <label htmlFor='start-date'>
-            Start status date:
-          </label>
-          <input
-            type='date'
-            name='start-date'
-            id='start-date'
-            value={this.state.start_date}
-            onChange={e => this.updateFilterStartDate(e.target.value)}
-          />
-        </div>
-        <div className='filter-issue-end-date'>
-          <label htmlFor='end-date'>
-            End status date:
-          </label>
-          <input
-            type='date'
-            name='end-date'
-            id='end-date'
-            value={this.state.end_date}
-            onChange={e => this.updateFilterEndDate(e.target.value)}
-          />
-        </div>
-        <div className='filter-issue-status'>
-        <label htmlFor='status'>
-            Status:
-          </label>
-          <select
-            type='string'
-            name='status'
-            id='status'
-            value={this.state.status}
-            onChange={e => this.updateFilterStatus(e.target.value)}>
-              <option>All</option>
-              <option>Solved</option>
-              <option>Killed</option>
-              <option>Combined</option>
-          </select>
-        </div>
-        <div className='filted-issues'>
+          
+        <div className='filtered-issues-list'>
+          <h2 className='filtered-issues-title'>Filtered Issues</h2>
           {filteredIssues.map(issue => 
             (issue.reviewed === "yes")
               ? <Issue

@@ -5,5 +5,12 @@
 }
 
 .route-heading {
-    margin-top: 50px;
+    margin-top: 75px;
+    font-size: 36px;
+}
+
+.App {
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
 }

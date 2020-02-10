@@ -71,18 +71,18 @@ class Todo extends Component {
         <section className='todo-content'>
           <section className='todo-todo-wrapper'>
             <section className='todo-todo'>
-              <h3>{this.props.todo}</h3>
+              {this.props.todo}
             </section>
             <section className='todo-who'>
-              <h4>{this.props.who}</h4>
+              {this.props.who}
             </section>
           </section>
           <section className='todo-dates'>
             <section className='todo-created'>
-              <b>Created: </b><br/>{moment(this.props.created).format('L')}
+              <b>Created:</b><br/>{moment(this.props.created).format('L')}
             </section>
             <section className='todo-due'>
-              <b>Due: </b><br/>{moment(this.props.due).format('L')}
+              <b>Due:</b><br/>{moment(this.props.due).format('L')}
             </section>
           </section>
         </section>
@@ -90,30 +90,29 @@ class Todo extends Component {
         <section className={`todo-status ${this.props.show_status}`}>
           <b>Status: </b>{this.props.status} <b>Status Date: </b> {moment(this.props.status_date).format('L')}
         </section>  
-        <section className={`todo-buttons ${this.props.buttons}`}>
+        <section className={`todo-status-buttons ${this.props.buttons}`}>
           <button 
-            className='todo-done-button'
+            className={`todo-done-button todo-button ${(status === 'done')}`}
             onClick={() => this.handleStatus('Done', moment(Date.now()).format('YYYY-MM-DD'))}>
               Done
           </button>
           <button 
-            className='todo-not-done-button'
+            className={`todo-not-done-button todo-button ${(status === 'not-done')}`}
             onClick={() => this.handleStatus('Not Done', moment(Date.now()).format('YYYY-MM-DD'))}>
               Not Done
           </button>
           <button 
-            className='todo-hold-button'
+            className={`todo-hold-button todo-button ${(status === 'hold')}`}
             onClick={() => this.handleStatus('Hold', moment(Date.now()).format('YYYY-MM-DD'))}>
               Hold
           </button>
-          <Link to={`/EditTodo/${this.props.id}`}>
-            <button
-              className='todo-edit'>
-                Edit
-            </button>
-          </Link>
         </section>
-
+        <Link to={`/EditTodo/${this.props.id}`}>
+          <button
+            className={`todo-edit-button ${this.props.buttons}`}>
+              Edit
+          </button>
+        </Link>
       </div>
     );
   };
