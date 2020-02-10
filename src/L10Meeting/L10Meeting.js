@@ -5,6 +5,7 @@ import Todos from '../Todos/Todos';
 import Issues from '../Issues/Issues';
 import TractionMissionControlContext from '../TractionMissionControlContext';
 import config from '../config';
+import './L10Meeting.css';
 
 class L10Meeting extends Component {
   static contextType = TractionMissionControlContext;
