@@ -68,6 +68,7 @@ class EditTodo extends Component {
         event.preventDefault();
         const todoId = this.props.match.params.id;
         const updatedTodo = {
+            id: todoId,
             todo: this.state.todo.value,
             who: this.state.who.value,
             created: this.state.created,
