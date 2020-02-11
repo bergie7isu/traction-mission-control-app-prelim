@@ -30,7 +30,14 @@ React, CSS, Node, Express, PostgreSQL
 
 #### `/api/todos`
 
+##### Methods:
+`GET` - returns a list of all todos
+`POST` - adds a new todo
+
 #### `/api/todos/:id`
+`GET` - returns a specific todo
+`DELETE` - removes a specific todo
+`PATCH` - updates a specific todo
 
 #### `/api/issues`
 
