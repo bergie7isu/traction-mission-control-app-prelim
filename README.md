@@ -30,17 +30,15 @@ React, CSS, Node, Express, PostgreSQL
 
 #### Todo Object Example
 ```javascript
-{
-    id: todo.id,
-    todo: xss(todo.todo),
-    who: todo.who,
-    created: todo.created,
-    due: todo.due,
-    status: todo.status,
-    status_date: todo.status_date,
-    reviewed: todo.reviewed,
-    issue: todo.issue
-}
+{id: [integer],
+todo: [string],
+who: [string],
+created: [date],
+due: [date],
+status: [string],
+status_date: [date],
+reviewed: [string],
+issue: [integer]}
 ```
 
 #### `/api/todos`
