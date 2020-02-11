@@ -16,7 +16,7 @@
 }
 
 .todo-todo-wrapper {
-  width: 70%;
+  flex: 1;
 }
 
 .todo-todo {
@@ -37,12 +37,19 @@
 }
 
 .todo-dates {
-  width: 30%;
+  width: 100px;
   font-size: 14px;
 }
 
 .todo-status {
+  display: flex;
+  justify-content: left;
   font-size: 14px;
+}
+
+.todo-status-status, .todo-status-date {
+  margin-left: 10px;
+  margin-right: 10px;
 }
 
 .todo-status-buttons {
@@ -130,4 +137,57 @@
 
 .todo.hold {
   background-color: rgb(255, 210, 67);
+}
+
+@media screen and (min-width: 400px) {
+  .todo-status {
+    justify-content: center;
+  }
+
+  .hidden {
+    display: none;
+  }
+}
+
+@media screen and (min-width: 600px) {
+  .todo-wrapper {
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+  }
+
+  .todo-status-buttons {
+    display: flex;
+    flex-direction: column;
+    margin: 5px;
+  }
+
+  .todo-content {
+    flex: 1;
+  }
+
+  .todo-button {
+    margin-top: 1px;
+    margin-bottom: 1px;
+    padding: 2px;
+  }
+
+  .todo-dates {
+    margin-right: 30px;
+  }
+
+  .todo-status {
+    flex-direction: column;
+    width: 100px;
+    margin-left: 30px;
+    margin-right: 0;
+  }
+
+  .todo-status-status, .todo-status-date {
+    margin: 0;
+  }
+
+  .hidden {
+    display: none;
+  }
 }

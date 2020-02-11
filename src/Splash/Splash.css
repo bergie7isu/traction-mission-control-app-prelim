@@ -3,6 +3,10 @@
   border-radius: 30px;
   padding: 10px;
   color: black;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 100px;
 }
 
 .splash-header-title {
@@ -46,10 +50,6 @@
   border-radius: 30px;
   padding: 10px;
   color: black;
-  max-width: 600px;
-  margin-top: 300px;
-  margin-left: auto;
-  margin-right: auto;
 }
 
 .splash-footer {
@@ -57,12 +57,55 @@
   border-radius: 30px;
   padding: 10px;
   color: black;
-  max-width: 600px;
-  margin-top: 300px;
+  margin-top: 50px;
   margin-left: auto;
   margin-right: auto;
+  max-width: 400px;
 }
 
 .go-to-app-button.small {
   font-size: 20px;
+}
+
+.rocket-gif-small {
+  width: 100px;
+  display: block;
+  transform: rotate(315deg);
+  position: relative;
+  right: 3px;
+  margin: 20px;
+}
+
+.rocket-gif-big {
+  width: 225px;
+  transform: rotate(315deg);
+  position: relative;
+  right: 8px;
+}
+
+.rocket-wrapper {
+  margin-top: 600px;
+  margin-bottom: 600px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media screen and (min-width: 600px) {
+  .rocket-wrapper {
+    flex-direction: row;
+  }
+
+  .rocket-gif-big {
+    width: 350px;
+    right: 10px;
+  }
+
+  .rocket-gif-small {
+    right: 4px;
+  }
 }

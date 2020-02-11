@@ -71,7 +71,12 @@ class L10Meeting extends Component {
         <button
           className='close-meeting-button'
           onClick={() => this.handleCloseMeeting()}>
-            Close Meeting
+            <div className='close-meeting-button-title'>
+              Close Meeting
+            </div>
+            <div className='close-meeting-button-sub-title'>
+              (remove completed items)
+            </div>
         </button>
       </div>
     );

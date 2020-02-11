@@ -16,7 +16,7 @@
 }
 
 .issue-issue-wrapper {
-  width: 70%;
+  flex: 1;
 }
 
 .issue-issue {
@@ -37,12 +37,19 @@
 }
 
 .issue-dates {
-  width: 30%;
+  width: 100px;
   font-size: 14px;
 }
 
 .issue-status {
+  display: flex;
+  justify-content: left;
   font-size: 14px;
+}
+
+.issue-status-status, .issue-status-date {
+  margin-left: 10px;
+  margin-right: 10px;
 }
 
 .issue-status-buttons {
@@ -130,4 +137,57 @@
 
 .issue.combined {
   background-color: rgb(255, 210, 67);
+}
+
+@media screen and (min-width: 400px) {
+  .issue-status {
+    justify-content: center;
+  }
+
+  .hidden {
+    display: none;
+  }
+}
+
+@media screen and (min-width: 600px) {
+  .issue-wrapper {
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+  }
+
+  .issue-status-buttons {
+    display: flex;
+    flex-direction: column;
+    margin: 5px;
+  }
+
+  .issue-content {
+    flex: 1;
+  }
+
+  .issue-button {
+    margin-top: 1px;
+    margin-bottom: 1px;
+    padding: 2px;
+  }
+
+  .issue-dates {
+    margin-right: 30px;
+  }
+
+  .issue-status {
+    flex-direction: column;
+    width: 100px;
+    margin-left: 30px;
+    margin-right: 0;
+  }
+
+  .issue-status-status, .issue-status-date {
+    margin: 0;
+  }
+
+  .hidden {
+    display: none;
+  }
 }

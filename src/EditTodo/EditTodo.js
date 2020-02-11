@@ -24,8 +24,7 @@ class EditTodo extends Component {
             status_date: '',
             reviewed: '',
             issue: null,
-            issueText: '',
-            ready: false
+            issueText: ''
         };
     };
 
@@ -59,9 +58,6 @@ class EditTodo extends Component {
                 issueText: issue[0].issue,
             });
         };
-        this.setState({
-            ready: true
-        });
     };
 
     handleSubmit = event => {
@@ -186,115 +182,111 @@ class EditTodo extends Component {
     };
 
     render() {
-        if (!this.state.ready) {
-            return null
-        } else {
-            const { issues } = this.context;
-            const { team } = this.context;
-            const todoError = this.validateTodo();
-            const whoError = this.validateWho();
-            const dueError = this.validateDue();
-            return (
-                <div className='edit-todo'>
-                    <h2 className='edit-todo-title'>Edit a To-do!</h2>
-                    <form
-                        className="edit-todo-form"
-                        onSubmit={this.handleSubmit}>
-                            <div className='edit-todo-inputs'>
-                                <div className='edit-todo-todo'>
-                                    <label htmlFor='todo'>
-                                        What's the to-do?
-                                    </label>
-                                    <textarea
-                                        type='string'
-                                        name='todo'
-                                        id='todo'
-                                        placeholder='Action!'
-                                        value={this.state.todo.value}
-                                        onChange={e => this.updateTodo(e.target.value)}/>
-                                </div>
-                                {this.state.todo.touched && <ValidationError message={todoError} />}
-                                <div className='edit-todo-who'>
-                                    <label htmlFor='who'>
-                                        Whose to-do is it?
-                                    </label>
-                                    <select
-                                        type='string'
-                                        name='who'
-                                        id='who'
-                                        value={this.state.who.value}
-                                        onChange={e => this.updateWho(e.target.value)}>
-                                            <option>--Select an owner!--</option>
-                                            {team.map(name =>
-                                                <option
-                                                    key={name}>
-                                                        {name}
+        const { issues } = this.context;
+        const { team } = this.context;
+        const todoError = this.validateTodo();
+        const whoError = this.validateWho();
+        const dueError = this.validateDue();
+        return (
+            <div className='edit-todo'>
+                <h2 className='edit-todo-title'>Edit a To-do!</h2>
+                <form
+                    className="edit-todo-form"
+                    onSubmit={this.handleSubmit}>
+                        <div className='edit-todo-inputs'>
+                            <div className='edit-todo-todo'>
+                                <label htmlFor='todo'>
+                                    What's the to-do?
+                                </label>
+                                <textarea
+                                    type='string'
+                                    name='todo'
+                                    id='todo'
+                                    placeholder='Action!'
+                                    value={this.state.todo.value}
+                                    onChange={e => this.updateTodo(e.target.value)}/>
+                            </div>
+                            {this.state.todo.touched && <ValidationError message={todoError} />}
+                            <div className='edit-todo-who'>
+                                <label htmlFor='who'>
+                                    Whose to-do is it?
+                                </label>
+                                <select
+                                    type='string'
+                                    name='who'
+                                    id='who'
+                                    value={this.state.who.value}
+                                    onChange={e => this.updateWho(e.target.value)}>
+                                        <option>--Select an owner!--</option>
+                                        {team.map(name =>
+                                            <option
+                                                key={name}>
+                                                    {name}
+                                            </option>
+                                        )}
+                                </select>
+                            </div>
+                            {this.state.who.touched && <ValidationError message={whoError} />}
+                            <div className='edit-todo-due'>
+                                <label htmlFor='due'>
+                                    When is this to-do due?
+                                </label>
+                                <input
+                                    type='date'
+                                    name='due'
+                                    id='due'
+                                    value={this.state.due.value}
+                                    onChange={e => this.updateDue(e.target.value)}
+                                    />
+                            </div>
+                            {this.state.due.touched && <ValidationError message={dueError} />}
+                            <div className='edit-todo-issue'>
+                                <label htmlFor='issue'>
+                                    What issue is this to-do related to?
+                                </label>
+                                <select
+                                    type='string'
+                                    name='issue'
+                                    id='issue'
+                                    value={this.state.issueText}
+                                    onChange={e => this.updateIssue(e.target.value)}>
+                                        <option>--Select an issue!--</option>
+                                        {issues.map(issue =>
+                                            (issue.reviewed === "no")
+                                                ? <option
+                                                key={issue.id}>
+                                                    {issue.issue}
                                                 </option>
-                                            )}
-                                    </select>
-                                </div>
-                                {this.state.who.touched && <ValidationError message={whoError} />}
-                                <div className='edit-todo-due'>
-                                    <label htmlFor='due'>
-                                        When is this to-do due?
-                                    </label>
-                                    <input
-                                        type='date'
-                                        name='due'
-                                        id='due'
-                                        value={this.state.due.value}
-                                        onChange={e => this.updateDue(e.target.value)}
-                                        />
-                                </div>
-                                {this.state.due.touched && <ValidationError message={dueError} />}
-                                <div className='edit-todo-issue'>
-                                    <label htmlFor='issue'>
-                                        What issue is this to-do related to?
-                                    </label>
-                                    <select
-                                        type='string'
-                                        name='issue'
-                                        id='issue'
-                                        value={this.state.issueText}
-                                        onChange={e => this.updateIssue(e.target.value)}>
-                                            <option>--Select an issue!--</option>
-                                            {issues.map(issue =>
-                                                (issue.reviewed === "no")
-                                                    ? <option
-                                                    key={issue.id}>
-                                                        {issue.issue}
-                                                    </option>
-                                                    : null
-                                            )}
-                                    </select>
-                                </div>
+                                                : null
+                                        )}
+                                </select>
                             </div>
-                            <div className='edit-todo-buttons'>
-                                <button
-                                    type='submit'
-                                    disabled={
-                                        this.validateTodo() ||
-                                        this.validateWho() ||
-                                        this.validateDue()}>
-                                    Update To-do!
-                                </button>
-                                <button
-                                    type='button'
-                                    onClick={() => this.props.history.goBack()}>
-                                        Cancel
-                                </button>
-                                
-                            </div>
+                        </div>
+                        <div className='edit-todo-buttons'>
                             <button
-                                className='delete-todo-button'
-                                type='button'
-                                onClick={this.handleDelete}>
-                                    Delete<br/>To-do
+                                type='submit'
+                                disabled={
+                                    this.validateTodo() ||
+                                    this.validateWho() ||
+                                    this.validateDue()}>
+                                Update To-do!
                             </button>
-                    </form>
-                </div>
-            );
-        };
+                            <button
+                                type='button'
+                                onClick={() => this.props.history.goBack()}>
+                                    Cancel
+                            </button>
+                            
+                        </div>
+                        <button
+                            className='delete-todo-button'
+                            type='button'
+                            onClick={this.handleDelete}>
+                                Delete<br/>To-do
+                        </button>
+                </form>
+            </div>
+        );
     };
 };
 

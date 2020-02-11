@@ -19,8 +19,7 @@ class EditIssue extends Component {
             created: '',
             status: '',
             status_date: '',
-            reviewed: '',
-            ready: false
+            reviewed: ''
         };
     };
 
@@ -40,8 +39,7 @@ class EditIssue extends Component {
             created: issue[0].created,
             status: issue[0].status,
             status_date: issue[0].status_date,
-            reviewed: issue[0].reviewed,
-            ready: true
+            reviewed: issue[0].reviewed
         });
     };
 

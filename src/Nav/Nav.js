@@ -15,6 +15,7 @@ class Nav extends Component {
               exact
               className='link'
               activeClassName='selected'
+              onClick={() => window.scrollTo(0, 0)}
             >
               L-10 Meeting
             </NavLink>
@@ -25,6 +26,7 @@ class Nav extends Component {
               exact
               className='link'
               activeClassName='selected'
+              onClick={() => window.scrollTo(0, 0)}
             >
               Archive
             </NavLink>
@@ -35,6 +37,7 @@ class Nav extends Component {
               exact
               className='link'
               activeClassName='selected'
+              onClick={() => window.scrollTo(0, 0)}
             >
               Splash
             </NavLink>

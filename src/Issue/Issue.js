@@ -39,42 +39,47 @@ class Issue extends Component {
     }
     return (
       <div className={`issue ${status}`}>
-
-        <section className='issue-content'>
-          <section className='issue-issue-wrapper'>
-            <section className='issue-issue'>
-              {this.props.issue}
+        <section className='issue-wrapper'>
+          <section className='issue-content'>
+            <section className='issue-issue-wrapper'>
+              <section className='issue-issue'>
+                {this.props.issue}
+              </section>
+              <section className='issue-who'>
+                {this.props.who}
+              </section>
             </section>
-            <section className='issue-who'>
-              {this.props.who}
+            <section className='issue-dates'>
+              <section className='issue-created'>
+                <b>Created:</b><br/>{moment(this.props.created).format('L')}
+              </section>
             </section>
           </section>
-          <section className='issue-dates'>
-            <section className='issue-created'>
-              <b>Created:</b><br/>{moment(this.props.created).format('L')}
+          <section className={`issue-status ${this.props.show_status}`}>
+            <section className='issue-status-status'>
+              <b>Status:</b><br/>{this.props.status}
             </section>
+            <section className='issue-status-date'>
+              <b>Date:</b><br/>{moment(this.props.status_date).format('L')}
+            </section>
+          </section>  
+          <section className={`issue-status-buttons ${this.props.buttons}`}>
+            <button
+              className={`issue-solved-button issue-button ${(status === 'solved')}`}
+              onClick={() => this.handleStatus('Solved', moment(Date.now()).format('YYYY-MM-DD'))}>
+                Solved
+            </button>
+            <button
+              className={`issue-killed-button issue-button ${(status === 'killed')}`}
+              onClick={() => this.handleStatus('Killed', moment(Date.now()).format('YYYY-MM-DD'))}>
+                Killed
+            </button>
+            <button 
+              className={`issue-combined-button issue-button ${(status === 'combined')}`}
+              onClick={() => this.handleStatus('Combined', moment(Date.now()).format('YYYY-MM-DD'))}>
+                Combined
+            </button>
           </section>
-        </section>
-
-        <section className={`issue-status ${this.props.show_status}`}>
-          <b>Status: </b>{this.props.status} <b>Status Date: </b> {moment(this.props.status_date).format('L')}
-        </section>  
-        <section className={`issue-status-buttons ${this.props.buttons}`}>
-          <button
-            className={`issue-solved-button issue-button ${(status === 'solved')}`}
-            onClick={() => this.handleStatus('Solved', moment(Date.now()).format('YYYY-MM-DD'))}>
-              Solved
-          </button>
-          <button
-            className={`issue-killed-button issue-button ${(status === 'killed')}`}
-            onClick={() => this.handleStatus('Killed', moment(Date.now()).format('YYYY-MM-DD'))}>
-              Killed
-          </button>
-          <button 
-            className={`issue-combined-button issue-button ${(status === 'combined')}`}
-            onClick={() => this.handleStatus('Combined', moment(Date.now()).format('YYYY-MM-DD'))}>
-              Combined
-          </button>
         </section>
         <Link to={`/EditIssue/${this.props.id}`}>
           <button

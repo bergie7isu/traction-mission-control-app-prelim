@@ -8,6 +8,7 @@ import AddTodo from './AddTodo/AddTodo';
 import AddIssue from './AddIssue/AddIssue';
 import EditTodo from './EditTodo/EditTodo';
 import EditIssue from './EditIssue/EditIssue';
+import Loading from './Loading/Loading';
 import TractionMissionControlContext from './TractionMissionControlContext';
 import data from './dummy-store';
 import config from './config';
@@ -146,7 +147,9 @@ class App extends Component {
 
   render() {
     if(!this.state.todosReady || !this.state.issuesReady || !this.state.teamReady) {
-      return null
+      return (
+        <Loading />
+      )
     } else {
       const contextValue = {
         todos: this.state.todos,

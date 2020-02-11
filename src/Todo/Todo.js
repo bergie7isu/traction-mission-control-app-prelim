@@ -67,45 +67,50 @@ class Todo extends Component {
     }
     return (
       <div className={`todo ${status}`}>
-
-        <section className='todo-content'>
-          <section className='todo-todo-wrapper'>
-            <section className='todo-todo'>
-              {this.props.todo}
+        <section className='todo-wrapper'>
+          <section className='todo-content'>
+            <section className='todo-todo-wrapper'>
+              <section className='todo-todo'>
+                {this.props.todo}
+              </section>
+              <section className='todo-who'>
+                {this.props.who}
+              </section>
             </section>
-            <section className='todo-who'>
-              {this.props.who}
+            <section className='todo-dates'>
+              <section className='todo-created'>
+                <b>Created:</b><br/>{moment(this.props.created).format('L')}
+              </section>
+              <section className='todo-due'>
+                <b>Due:</b><br/>{moment(this.props.due).format('L')}
+              </section>
             </section>
           </section>
-          <section className='todo-dates'>
-            <section className='todo-created'>
-              <b>Created:</b><br/>{moment(this.props.created).format('L')}
+          <section className={`todo-status ${this.props.show_status}`}>
+            <section className='todo-status-status'>
+              <b>Status:</b><br/>{this.props.status}
             </section>
-            <section className='todo-due'>
-              <b>Due:</b><br/>{moment(this.props.due).format('L')}
+            <section className='todo-status-date'>
+              <b>Date:</b><br/>{moment(this.props.status_date).format('L')}
             </section>
+          </section>  
+          <section className={`todo-status-buttons ${this.props.buttons}`}>
+            <button 
+              className={`todo-done-button todo-button ${(status === 'done')}`}
+              onClick={() => this.handleStatus('Done', moment(Date.now()).format('YYYY-MM-DD'))}>
+                Done
+            </button>
+            <button 
+              className={`todo-not-done-button todo-button ${(status === 'not-done')}`}
+              onClick={() => this.handleStatus('Not Done', moment(Date.now()).format('YYYY-MM-DD'))}>
+                Not Done
+            </button>
+            <button 
+              className={`todo-hold-button todo-button ${(status === 'hold')}`}
+              onClick={() => this.handleStatus('Hold', moment(Date.now()).format('YYYY-MM-DD'))}>
+                Hold
+            </button>
           </section>
-        </section>
-
-        <section className={`todo-status ${this.props.show_status}`}>
-          <b>Status: </b>{this.props.status} <b>Status Date: </b> {moment(this.props.status_date).format('L')}
-        </section>  
-        <section className={`todo-status-buttons ${this.props.buttons}`}>
-          <button 
-            className={`todo-done-button todo-button ${(status === 'done')}`}
-            onClick={() => this.handleStatus('Done', moment(Date.now()).format('YYYY-MM-DD'))}>
-              Done
-          </button>
-          <button 
-            className={`todo-not-done-button todo-button ${(status === 'not-done')}`}
-            onClick={() => this.handleStatus('Not Done', moment(Date.now()).format('YYYY-MM-DD'))}>
-              Not Done
-          </button>
-          <button 
-            className={`todo-hold-button todo-button ${(status === 'hold')}`}
-            onClick={() => this.handleStatus('Hold', moment(Date.now()).format('YYYY-MM-DD'))}>
-              Hold
-          </button>
         </section>
         <Link to={`/EditTodo/${this.props.id}`}>
           <button
