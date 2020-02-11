@@ -28,6 +28,13 @@ React, CSS, Node, Express, PostgreSQL
 
 ## API Documentation:
 
+#### `/api/todos`
+
+#### `/api/todos/:id`
+
+#### `/api/issues`
+
+#### `/api/issues/:id`
 
 
 
