@@ -180,7 +180,7 @@ class FilteredTodos extends Component {
         <div className='filtered-todos-list'>
           <h2 className='filtered-todos-title'>Filtered To-dos</h2>
           {filteredTodos.map(todo => 
-            (todo.reviewed === "yes")
+            (todo.reviewed === 'yes')
               ? <Todo
                 key={todo.id}
                 id={todo.id}

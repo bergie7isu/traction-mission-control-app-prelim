@@ -155,29 +155,29 @@ class EditTodo extends Component {
         } else {
             this.setState({
                 issue: null,
-                issueText: ""
+                issueText: ''
             });
         }
     };
 
     validateTodo() {
         const todo = this.state.todo.value.trim();
-        if (todo === "") {
-            return "Enter a to-do!"
+        if (todo === '') {
+            return 'Enter a to-do!'
         }
     };
 
     validateWho() {
         const who = this.state.who.value.trim();
-        if (who === "--Select an owner!--" || who === "") {
-            return "Someone needs to own it!"
+        if (who === '--Select an owner!--' || who === '') {
+            return 'Someone needs to own it!'
         }
     };
  
     validateDue() {
         const due = this.state.due.value.trim();
-        if (due === "") {
-            return "Commit to a due date!"
+        if (due === '') {
+            return 'Commit to a due date!'
         }
     };
 
@@ -191,7 +191,7 @@ class EditTodo extends Component {
             <div className='edit-todo'>
                 <h2 className='edit-todo-title'>Edit a To-do!</h2>
                 <form
-                    className="edit-todo-form"
+                    className='edit-todo-form'
                     onSubmit={this.handleSubmit}>
                         <div className='edit-todo-inputs'>
                             <div className='edit-todo-todo'>
@@ -252,7 +252,7 @@ class EditTodo extends Component {
                                     onChange={e => this.updateIssue(e.target.value)}>
                                         <option>--Select an issue!--</option>
                                         {issues.map(issue =>
-                                            (issue.reviewed === "no")
+                                            (issue.reviewed === 'no')
                                                 ? <option
                                                 key={issue.id}>
                                                     {issue.issue}

@@ -12,7 +12,7 @@ class Issues extends Component {
             <div className='issues'>
                 <h2 className='issues-title'>Issues List</h2>
                 {issues.map(issue => 
-                    (issue.reviewed === "no")
+                    (issue.reviewed === 'no')
                         ? <Issue
                             key={issue.id}
                             id={issue.id}

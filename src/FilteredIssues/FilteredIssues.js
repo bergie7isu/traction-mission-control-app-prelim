@@ -181,7 +181,7 @@ class FilteredIssues extends Component {
         <div className='filtered-issues-list'>
           <h2 className='filtered-issues-title'>Filtered Issues</h2>
           {filteredIssues.map(issue => 
-            (issue.reviewed === "yes")
+            (issue.reviewed === 'yes')
               ? <Issue
                 key={issue.id}
                 id={issue.id}

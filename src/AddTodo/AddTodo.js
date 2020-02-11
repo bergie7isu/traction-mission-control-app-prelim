@@ -12,11 +12,11 @@ class AddTodo extends Component {
         super(props);
         this.state = {
             todo: {
-                value: "",
+                value: '',
                 touched: false
             },
             who: {
-                value: "",
+                value: '',
                 touched: false
             },
             due: {
@@ -24,7 +24,7 @@ class AddTodo extends Component {
                 touched: false
             },
             issue: null,
-            issueText: ""
+            issueText: ''
         };
     };
 
@@ -37,7 +37,7 @@ class AddTodo extends Component {
             due: this.state.due.value,
             status: null,
             status_date: null,
-            reviewed: "no",
+            reviewed: 'no',
             issue: this.state.issue
         };
         fetch(config.API_ENDPOINT + `/api/todos`, {
@@ -100,29 +100,29 @@ class AddTodo extends Component {
         } else {
             this.setState({
                 issue: null,
-                issueText: ""
+                issueText: ''
             });
         }
     };
 
     validateTodo() {
         const todo = this.state.todo.value.trim();
-        if (todo === "") {
-            return "Enter a to-do!"
+        if (todo === '') {
+            return 'Enter a to-do!'
         }
     };
 
     validateWho() {
         const who = this.state.who.value.trim();
-        if (who === "--Select an owner!--" || who === "") {
-            return "Someone needs to own it!"
+        if (who === '--Select an owner!--' || who === '') {
+            return 'Someone needs to own it!'
         }
     };
 
     validateDue() {
         const due = this.state.due.value.trim();
-        if (due === "") {
-            return "Commit to a due date!"
+        if (due === '') {
+            return 'Commit to a due date!'
         }
     };
 
@@ -136,7 +136,7 @@ class AddTodo extends Component {
             <div className='add-todo'>
                 <h2 className='add-todo-title'>Add a To-do!</h2>
                 <form
-                    className="add-todo-form"
+                    className='add-todo-form'
                     onSubmit={this.handleSubmit}>
                         <div className='add-todo-inputs'>
                             <div className='add-todo-todo'>
@@ -147,7 +147,7 @@ class AddTodo extends Component {
                                     type='string'
                                     name='todo'
                                     id='todo'
-                                    placeholder="Action!"
+                                    placeholder='Action!'
                                     onChange={e => this.updateTodo(e.target.value)}/>
                             </div>
                             {this.state.todo.touched && <ValidationError message={todoError} />}
@@ -194,7 +194,7 @@ class AddTodo extends Component {
                                     onChange={e => this.updateIssue(e.target.value)}>
                                         <option>--Select an issue!--</option>
                                         {issues.map(issue =>
-                                            (issue.reviewed === "no")
+                                            (issue.reviewed === 'no')
                                                 ? <option
                                                 key={issue.id}>
                                                     {issue.issue}

@@ -35,7 +35,7 @@ class Todo extends Component {
         created: moment(Date.now()).format('YYYY-MM-DD'),
         status: null,
         status_date: null,
-        reviewed: "no"
+        reviewed: 'no'
       };
       fetch(config.API_ENDPOINT + `/api/issues`, {
         method: 'POST',

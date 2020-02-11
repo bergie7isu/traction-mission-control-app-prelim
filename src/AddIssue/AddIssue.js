@@ -12,11 +12,11 @@ class AddIssue extends Component {
         super(props);
         this.state = {
             issue: {
-                value: "",
+                value: '',
                 touched: false
             },
             who: {
-                value: "",
+                value: '',
                 touched: false
             }
         };
@@ -30,7 +30,7 @@ class AddIssue extends Component {
             created: moment(Date.now()).format('YYYY-MM-DD'),
             status: null,
             status_date: null,
-            reviewed: "no"
+            reviewed: 'no'
         };
         fetch(config.API_ENDPOINT + `/api/issues`, {
             method: 'POST',
@@ -73,15 +73,15 @@ class AddIssue extends Component {
 
     validateIssue() {
         const issue = this.state.issue.value.trim();
-        if (issue === "") {
-            return "Enter an issue!"
+        if (issue === '') {
+            return 'Enter an issue!'
         }
     };
 
     validateWho() {
         const who = this.state.who.value.trim();
-        if (who === "--Select an owner!--" || who === "") {
-            return "Someone needs to own it!"
+        if (who === '--Select an owner!--' || who === '') {
+            return 'Someone needs to own it!'
         }
     };
 
@@ -93,7 +93,7 @@ class AddIssue extends Component {
             <div className='add-issue'>
                 <h2 className='add-issue-title'>Add an Issue!</h2>
                 <form
-                    className="add-issue-form"
+                    className='add-issue-form'
                     onSubmit={this.handleSubmit}>
                         <div className='add-issue-inputs'>
                             <div className='add-issue-issue'>
@@ -104,7 +104,7 @@ class AddIssue extends Component {
                                     type='string'
                                     name='issue'
                                     id='issue'
-                                    placeholder="Problem, idea, communication..."
+                                    placeholder='Problem, idea, communication...'
                                     onChange={e => this.updateIssue(e.target.value)}/>
                             </div>
                             {this.state.issue.touched && <ValidationError message={issueError} />}

@@ -12,7 +12,7 @@ class Todos extends Component {
       <div className='todos'>
         <h2 className='todos-title'>To-do List</h2>
         {todos.map(todo => 
-          (todo.reviewed === "no")
+          (todo.reviewed === 'no')
             ? <Todo
               key={todo.id}
               id={todo.id}
