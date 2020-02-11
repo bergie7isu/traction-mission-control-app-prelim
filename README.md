@@ -30,15 +30,30 @@ React, CSS, Node, Express, PostgreSQL
 
 #### Todo Object Example
 ```javascript
-{id: [integer],
-todo: [string],
-who: [string],
-created: [date],
-due: [date],
-status: [string],
-status_date: [date],
-reviewed: [string],
-issue: [integer]}
+{
+    "id": 1,
+    "todo": "First to-do",
+    "who": "John Doe",
+    "created": "2020-02-11",
+    "due": "2020-02-18",
+    "status": "Not Done",
+    "status_date": "2020-02-18",
+    "reviewed": "yes",
+    "issue": 2
+}
+```
+
+#### Issue Object Example
+```javascript
+{
+    "id": 3,
+    "issue": "Third issue",
+    "who": "Jane Doe",
+    "created": "2020-02-11",
+    "status": "Solved",
+    "status_date": "2020-02-18",
+    "reviewed": "no"
+},
 ```
 
 #### `/api/todos`
@@ -48,8 +63,8 @@ issue: [integer]}
 `POST` - adds a new todo
 
 ##### Required Parameters:
-`GET` - none
-`POST` - 
+`GET` - none\
+`POST` - todo, who, created, due, reviewed
 
 #### `/api/todos/:id`
 
@@ -58,11 +73,20 @@ issue: [integer]}
 `DELETE` - removes a specific todo\
 `PATCH` - updates a specific todo
 
+##### Required Parameters:
+`GET` - id\
+`DELETE` - id\
+`PATCH` - one of: todo, who, due, issue
+
 #### `/api/issues`
 
 ##### Methods:
 `GET` - returns a list of all issues\
 `POST` - adds a new issue
+
+##### Required Parameters:
+`GET` - none\
+`POST` - issue, who, created, reviewed
 
 #### `/api/issues/:id`
 
@@ -71,41 +95,7 @@ issue: [integer]}
 `DELETE` - removes a specific issue\
 `PATCH` - updates a specific issue
 
-
-
-
-
-
-
-
-
-
-
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+##### Required Parameters:
+`GET` - id\
+`DELETE` - id\
+`PATCH` - one of: issue, who
