@@ -19,7 +19,9 @@ We've all got issues. Keeping track of them in your L-10 Meeting and solving the
 Quickly view and filter archived to-dos and issues for yourself and your team. View historical performance data to drive accountability discussions.
 
 ## Screenshots:
-![Screenshot of To-do List](/src/images/todos-screenshot.JPG)
+![Screenshot of To-dos List](/src/images/todos-screenshot.JPG)
+![Screenshot of Issues List](/src/images/issues-screenshot.JPG)
+![Screenshot of Archive](/src/images/archive-screenshot.JPG)
 
 ## Technologies Used:
 React, CSS, Node, Express, PostgreSQL
