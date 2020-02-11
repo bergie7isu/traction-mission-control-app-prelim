@@ -9,10 +9,10 @@ https://traction-mission-control-app.now.sh/
 ### Summary:
 The Traction Mission Control App is your go-to tool for driving accountability, follow-through, and consistent communication in your organization running on the EOS Platform.
 
-#### `To-dos:`
+##### `To-dos:`
 Document action items in your L-10 Meetings and drive team accountability to complete tasks on-time, everytime. Link to-dos directly to the issues they solve, and track completion performance right in the app! When everyone gets their tasks done, the team wins!
 
-#### `Issues:`
+##### `Issues:`
 We've all got issues. Keeping track of them in your L-10 Meeting and solving them forever can be hard. Let Traction Mission Control help!
 
 #### `Archive Filtering:`
