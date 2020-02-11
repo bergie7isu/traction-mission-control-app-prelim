@@ -28,20 +28,50 @@ React, CSS, Node, Express, PostgreSQL
 
 ## API Documentation:
 
+#### Todo Object Example
+```javascript
+{
+    id: todo.id,
+    todo: xss(todo.todo),
+    who: todo.who,
+    created: todo.created,
+    due: todo.due,
+    status: todo.status,
+    status_date: todo.status_date,
+    reviewed: todo.reviewed,
+    issue: todo.issue
+}
+```
+
 #### `/api/todos`
 
 ##### Methods:
 `GET` - returns a list of all todos\
 `POST` - adds a new todo
 
+##### Required Parameters:
+`GET` - none
+`POST` - 
+
 #### `/api/todos/:id`
+
+##### Methods:
 `GET` - returns a specific todo\
 `DELETE` - removes a specific todo\
 `PATCH` - updates a specific todo
 
 #### `/api/issues`
 
+##### Methods:
+`GET` - returns a list of all issues\
+`POST` - adds a new issue
+
 #### `/api/issues/:id`
+
+##### Methods:
+`GET` - returns a specific issue\
+`DELETE` - removes a specific issue\
+`PATCH` - updates a specific issue
 
 
 
