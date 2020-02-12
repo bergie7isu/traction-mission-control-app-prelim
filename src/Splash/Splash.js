@@ -27,8 +27,16 @@ class Splash extends Component {
                 <section className='rocket-wrapper'>
                     <img src={rocket} alt='rocket' className='rocket-gif-small'/>
                     <section className='splash-sub-item'>
+                        <h2 className='splash-sub-title'>L-10 Meetings</h2>
+                        <p className='splash-sub-description'>Run your weekly L-10 Meetings like a boss. With your Agenda, To-do List, and Issues List right at your fingertips, you're ready to crush this.</p>
+                    </section>
+                    <img src={rocket} alt='rocket' className='rocket-gif-small'/>
+                </section>
+                <section className='rocket-wrapper'>
+                    <img src={rocket} alt='rocket' className='rocket-gif-small'/>
+                    <section className='splash-sub-item'>
                         <h2 className='splash-sub-title'>To-dos</h2>
-                        <p className='splash-sub-description'>Document action items in your L-10 Meetings and drive team accountability to complete tasks on-time, everytime. Link to-dos directly to the issues they solve, and track completion performance right in the app! When everyone gets their tasks done, the team wins!</p>
+                        <p className='splash-sub-description'>Document action items in your L-10 Meetings and drive team accountability to complete tasks on-time, every time. Link to-dos directly to the issues they solve, and track completion performance right in the app! When everyone gets their tasks done, the team wins!</p>
                     </section>
                     <img src={rocket} alt='rocket' className='rocket-gif-small'/>
                 </section>
